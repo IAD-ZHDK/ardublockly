@@ -230,5 +230,6 @@ Ardublockly.TOOLBOX_XML =
 '    <block type="spi_setup"></block>' +
 '    <block type="spi_transfer"></block>' +
 '    <block type="spi_transfer_return"></block>' +
+'    <block type="wifi_setup"></block>' +
 '  </category>' +
 '</xml>';
