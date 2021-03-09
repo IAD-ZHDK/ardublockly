@@ -114,6 +114,14 @@ Blockly.Arduino.Boards.profiles.uno = {
   interrupt: [['interrupt0', '2'], ['interrupt1', '3']]
 };
 
+Blockly.Arduino.Boards.profiles.uno_wifi_rev_2 =
+    Blockly.Arduino.Boards.duplicateBoardProfile(
+        Blockly.Arduino.Boards.profiles.uno,
+        'Arduino UNO WiFi Rev.2',
+        'Arduino UNO with ATmega4809 board',
+        'arduino:megaavr:uno2018:mode=on'
+    );
+
 /** Arduino Nano board profile (ATmega328p). */
 Blockly.Arduino.Boards.profiles.nano_328 = {
   name: 'Arduino Nano 328',

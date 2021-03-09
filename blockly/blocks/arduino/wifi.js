@@ -18,7 +18,7 @@ goog.require('Blockly.Types');
 
 
 /** Common HSV hue for all blocks in this category. */
-Blockly.Blocks.serial.HUE = 20;
+Blockly.Blocks.wifi.HUE = 10;
 
 Blockly.Blocks['wifi_setup'] = {
   /**
@@ -27,7 +27,7 @@ Blockly.Blocks['wifi_setup'] = {
    */
   init: function() {
     this.setHelpUrl('https://www.arduino.cc/en/Reference/WiFiNINABegin');
-    this.setColour(Blockly.Blocks.serial.HUE);
+    this.setColour(Blockly.Blocks.wifi.HUE);
     this.appendDummyInput()
         .appendField("Setup WiFi with ssid: ")
         .appendField(new Blockly.FieldTextInput(""), 'SSID')
