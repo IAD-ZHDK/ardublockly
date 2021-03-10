@@ -32,6 +32,9 @@ Ardublockly.init = function() {
     console.log('Offline app modal opened as non localhost host name found: ' +
                 document.location.hostname)
   }
+
+  // load from local storage if available
+  Ardublockly.loadLocalStorageBlocks();
 };
 
 /** Binds functions to each of the buttons, nav links, and related. */
@@ -581,6 +584,9 @@ Ardublockly.renderContent = function() {
 
   // Generate plain XML into element
   document.getElementById('content_xml').value = Ardublockly.generateXml();
+
+  // store the xml into the local storage on change
+  Ardublockly.saveLocalStorageBlocks();
 };
 
 /**

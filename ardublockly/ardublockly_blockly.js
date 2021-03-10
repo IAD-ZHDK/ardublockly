@@ -176,10 +176,39 @@ Ardublockly.loadSessionStorageBlocks = function() {
   }
 };
 
+
+/**
+ * Save blocks into local storage. Note that MSIE 11 does not support
+ * local on file:// URLs.
+ */
+Ardublockly.saveLocalStorageBlocks = function() {
+  if (window.localStorage) {
+    var xml = Blockly.Xml.workspaceToDom(Ardublockly.workspace);
+    var text = Blockly.Xml.domToText(xml);
+    window.localStorage.blocks = text;
+  }
+};
+
+/** Load blocks saved on local storage and deletes them from storage. */
+Ardublockly.loadLocalStorageBlocks = function() {
+  try {
+    var loadOnce = window.localStorage.blocks;
+  } catch (e) {
+    // Firefox sometimes throws a SecurityError when accessing sessionStorage.
+    // Restarting Firefox fixes this, so it looks like a bug.
+    var loadOnce = null;
+  }
+  if (loadOnce) {
+    var xml = Blockly.Xml.textToDom(loadOnce);
+    Blockly.Xml.domToWorkspace(xml, Ardublockly.workspace);
+  }
+};
+
 /** Discard all blocks from the workspace. */
 Ardublockly.discardAllBlocks = function() {
   var blockCount = Ardublockly.workspace.getAllBlocks().length;
   if (blockCount == 1) {
+    delete window.localStorage.blocks;
     Ardublockly.workspace.clear();
     Ardublockly.renderContent();
   } else if (blockCount > 1) {
@@ -189,6 +218,7 @@ Ardublockly.discardAllBlocks = function() {
             .replace('%1', blockCount),
         true,
         function() {
+          delete window.localStorage.blocks;
           Ardublockly.workspace.clear();
           Ardublockly.renderContent();
         });
