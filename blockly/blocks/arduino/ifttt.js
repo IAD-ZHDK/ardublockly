@@ -36,13 +36,13 @@ Blockly.Blocks['ifttt_setup'] = {
         .appendField(new Blockly.FieldTextInput(""), 'EVENT')
     this.appendValueInput('PARAM1')
         .setCheck(Blockly.Types.NUMBER.checkList)
-        .appendField(" optional parameter 1: ");
+        .appendField("optional parameter 1: ");
     this.appendValueInput('PARAM2')
         .setCheck(Blockly.Types.NUMBER.checkList)
-        .appendField(" optional parameter 2: ");
+        .appendField("optional parameter 2: ");
     this.appendValueInput('PARAM3')
         .setCheck(Blockly.Types.NUMBER.checkList)
-        .appendField(" optional parameter 3: ");
+        .appendField("optional parameter 3: ");
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
