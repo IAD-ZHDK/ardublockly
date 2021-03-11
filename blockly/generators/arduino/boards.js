@@ -114,6 +114,7 @@ Blockly.Arduino.Boards.profiles.uno = {
   interrupt: [['interrupt0', '2'], ['interrupt1', '3']]
 };
 
+/** Arduino UNO WiFi Rev.2 board profile (ATMega4809).*/
 Blockly.Arduino.Boards.profiles.uno_wifi_rev_2 =
     Blockly.Arduino.Boards.duplicateBoardProfile(
         Blockly.Arduino.Boards.profiles.uno,
@@ -121,6 +122,30 @@ Blockly.Arduino.Boards.profiles.uno_wifi_rev_2 =
         'Arduino UNO with ATmega4809 board',
         'arduino:megaavr:uno2018:mode=on'
     );
+
+/** Arduino MKR WiFi 1010 board profile (SAMD21).*/
+Blockly.Arduino.Boards.profiles.mkr_wifi_1010 = {
+  name: 'Arduino MKR WiFi 1010',
+  description: 'Arduino MKR with SAMD21 Cortex®-M0+ 32bit low power ARM MCU board',
+  compilerFlag: 'arduino:samd:mkrwifi1010',
+  analogPins: Blockly.Arduino.Boards.generateAnalogIo(0, 6),
+  digitalPins: Blockly.Arduino.Boards.generateDigitalIo(0, 14).concat(
+      Blockly.Arduino.Boards.generateAnalogIo(0, 6)),
+  pwmPins: Blockly.Arduino.Boards.generateDigitalIo(0, 8).concat(
+      [["10", "10"], ["12", "12"], ["A3", "18"], ["A4", "19"]]),
+  serial: Blockly.Arduino.Boards.profiles.uno.serial,
+  serialPins: { Serial: [['RX', '13'], ['TX', '14']] },
+  serialSpeed: Blockly.Arduino.Boards.profiles.uno.serialSpeed,
+  spi: Blockly.Arduino.Boards.profiles.uno.spi,
+  spiPins: { SPI: [['MOSI', '8'], ['MISO', '10'], ['SCK', '9']] },
+  spiClockDivide: Blockly.Arduino.Boards.profiles.uno.spiClockDivide,
+  i2c: Blockly.Arduino.Boards.profiles.uno.i2c,
+  i2cPins: { Wire: [['SDA', '11'], ['SCL', '12']] },
+  i2cSpeed: Blockly.Arduino.Boards.profiles.uno.i2cSpeed,
+  builtinLed: [['BUILTIN_1', '6']],
+  interrupt: [['interrupt0', '0'], ['interrupt1', '1'], ['interrupt4', '4'], ['interrupt5', '5'],
+    ['interrupt6', '6'], ['interrupt7', '7'], ['interrupt8', '8']] // there are more A1 -or 16-, A2 - or 17
+};
 
 /** Arduino Nano board profile (ATmega328p). */
 Blockly.Arduino.Boards.profiles.nano_328 = {

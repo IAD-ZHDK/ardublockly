@@ -50,6 +50,7 @@ class ServerCompilerSettings(object):
     #       send the selected flag to be saved as a single value
     __arduino_types = {'Uno': 'arduino:avr:uno',
                        'Uno Wifi Rev 2': 'arduino:megaavr:uno2018:mode=on',
+                       'Arduino MKR WiFi 1010': 'arduino:samd:mkrwifi1010',
                        'Nano 328': 'arduino:avr:nano:cpu=atmega328',
                        'Nano 168': 'arduino:avr:nano:cpu=atmega168',
                        'Leonardo': 'arduino:avr:leonardo',
