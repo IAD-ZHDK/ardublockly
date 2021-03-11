@@ -17,11 +17,11 @@
     "identifier": "com.embeddedlog.ardublockly",
     "LSApplicationCategoryType": "public.app-category.developer-tools"
   },
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/carlosperate/ardublockly.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carlosperate/ardublockly.git"
   },
-  "bugs" : {
-    "url" : "https://github.com/carlosperate/ardublockly/issues"
+  "bugs": {
+    "url": "https://github.com/carlosperate/ardublockly/issues"
   }
 }

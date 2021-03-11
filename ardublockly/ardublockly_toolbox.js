@@ -234,5 +234,6 @@ Ardublockly.TOOLBOX_XML =
 '  <sep></sep>' +
 '  <category id="catCAS" name="CAS">' +
 '    <block type="wifi_setup"></block>' +
+'    <block type="ifttt_setup"></block>' +
 '  </category>' +
 '</xml>';

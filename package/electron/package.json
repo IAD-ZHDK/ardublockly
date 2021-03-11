@@ -21,11 +21,11 @@
     "release": "gulp release --env=production",
     "start": "gulp start"
   },
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/carlosperate/ardublockly.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carlosperate/ardublockly.git"
   },
-  "bugs" : {
-    "url" : "https://github.com/carlosperate/ardublockly/issues"
+  "bugs": {
+    "url": "https://github.com/carlosperate/ardublockly/issues"
   }
 }
