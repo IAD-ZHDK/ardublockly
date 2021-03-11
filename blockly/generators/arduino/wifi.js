@@ -34,7 +34,7 @@ Blockly.Arduino['wifi_setup'] = function(block) {
   wifiSetupCode += `    delay(4000);\n`;
   wifiSetupCode += `  }\n`;
   wifiSetupCode += `  Serial.println("connected!");`;
-  Blockly.Arduino.addVariable("wifiStatus",`int status = WL_IDLE_STATUS`);
+  Blockly.Arduino.addVariable("wifiStatus",`int status = WL_IDLE_STATUS;`);
   Blockly.Arduino.addSetup('serial', setupSerial, true);
   Blockly.Arduino.addSetup('wifi', wifiSetupCode, true);
   var code = '';
