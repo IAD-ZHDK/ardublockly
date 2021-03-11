@@ -22,9 +22,6 @@ var webHookCode = 'println("test");';
  */
 Blockly.Arduino['ifttt_setup'] = function(block) {
  Blockly.Arduino.addInclude('IFTTTMaker', '#include <IFTTTMaker.h>');
- /**
-  Blockly.Arduino.addInclude('wifiNina', '#include <WiFiNINA.h>');
- */
   var key = block.getFieldValue('KEY');
   var event = block.getFieldValue('EVENT');
   var param1 = Blockly.Arduino.valueToCode(block, 'PARAM1', Blockly.Arduino.ORDER_ATOMIC) || '0';
@@ -34,7 +31,7 @@ Blockly.Arduino['ifttt_setup'] = function(block) {
   code += `, "${param1}"`;
   code += `, "${param2}"`;
   code += `, "${param3}"`;
-  code += `);`;
+  code += `);\n`;
 /** Blockly.Arduino.addSetup('ifttt', iftttSetupCode, true); */
   Blockly.Arduino.addVariable("wifiClient",`WiFiSSLClient client;`);
   Blockly.Arduino.addVariable("IFTTTMaker",`IFTTTMaker ifttt("${key}", client);`);

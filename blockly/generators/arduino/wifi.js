@@ -26,7 +26,16 @@ Blockly.Arduino['wifi_setup'] = function(block) {
 
   var ssid = block.getFieldValue('SSID');
   var password = block.getFieldValue('PASSWORD');
-  var wifiSetupCode = `WiFi.begin("${ssid}", "${password}");`;
+  var setupSerial = `Serial.begin(9600);`;
+  var wifiSetupCode =  `while (status != WL_CONNECTED) {\n`;
+  wifiSetupCode += `    Serial.print("Attempting to connect to WPA SSID: ");\n`;
+  wifiSetupCode += `    Serial.println(ssid);\n`;
+  wifiSetupCode += `    status = WiFi.begin("${ssid}", "${password}");\n`;
+  wifiSetupCode += `    delay(4000);\n`;
+  wifiSetupCode += `  }\n`;
+  wifiSetupCode += `  Serial.println("connected!");`;
+  Blockly.Arduino.addVariable("wifiStatus",`int status = WL_IDLE_STATUS`);
+  Blockly.Arduino.addSetup('serial', setupSerial, true);
   Blockly.Arduino.addSetup('wifi', wifiSetupCode, true);
   var code = '';
   return code;
