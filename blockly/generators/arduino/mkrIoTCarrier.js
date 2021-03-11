@@ -41,10 +41,10 @@ Blockly.Arduino['mkrIoTCarrier_led'] = function(block) {
 Blockly.Arduino['mkrIoTCarrier_Buzzer'] = function(block) {
  Blockly.Arduino.addInclude('Arduino_MKRIoTCarrier', '#include <Arduino_MKRIoTCarrier.h>');
  var frequency = Blockly.Arduino.valueToCode(block, 'FREQUENCY', Blockly.Arduino.ORDER_ATOMIC) || '0';
- if (frequency > 0) {
-  code = `carrier.Buzzer.sound(${frequency});\n`;
- } else {
+ if (frequency == 0) {
   code = `carrier.Buzzer.noSound();\n`;
+ } else {
+  code = `carrier.Buzzer.sound(${frequency});\n`;
  }
  var code;
  Blockly.Arduino.addVariable("MKRIoTCarrierObject",`MKRIoTCarrier carrier;`, true);

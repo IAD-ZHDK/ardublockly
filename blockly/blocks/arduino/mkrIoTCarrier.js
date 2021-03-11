@@ -46,7 +46,21 @@ Blockly.Blocks['mkrIoTCarrier_led'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip("Set one LED on the IOT Carrier");
-  }
+  },
+
+  onchange: function(event) {
+    if (!this.workspace || event.type == Blockly.Events.MOVE ||
+        event.type == Blockly.Events.UI) {
+      return;  // Block deleted or irrelevant event
+    }
+    var ID = Blockly.Arduino.valueToCode(
+        this, "LEDNUMBER", Blockly.Arduino.ORDER_ATOMIC)
+    if (ID > 4) {
+      this.setWarningText("LEDs can only have an ID of 0, 1, 2, 3 or 4", 'mkrIoTCarrier_led');
+    }  else {
+      this.setWarningText(null, 'mkrIoTCarrier_led');
+    }
+  },
 };
 
 
@@ -59,14 +73,33 @@ Blockly.Blocks['mkrIoTCarrier_Buzzer'] = {
     this.setHelpUrl('https://www.arduino.cc/education/explore-iot-kit');
     this.setColour(Blockly.Blocks.mkrIoTCarrier.HUE);
     this.appendDummyInput()
-        .appendField("Buzzer ")
+        .appendField("Buzzer")
     this.appendValueInput('FREQUENCY')
         .setCheck(Blockly.Types.NUMBER.checkList)
         .appendField(Blockly.Msg.ARD_TONEFREQ)
-        .appendField("Frequency:");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip("Set frequency of Buzzer on the IOT Carrier");
+  },
+
+  onchange: function(event) {
+    if (!this.workspace || event.type == Blockly.Events.MOVE ||
+        event.type == Blockly.Events.UI) {
+      return;  // Block deleted or irrelevant event
+    }
+    var freq = Blockly.Arduino.valueToCode(
+        this, "FREQUENCY", Blockly.Arduino.ORDER_ATOMIC)
+    if (freq == 0) {
+      this.setWarningText(null, 'mkrIoTCarrier_Buzzer');
+    } else if (freq < 31 || freq > 65535) {
+      this.setWarningText(Blockly.Msg.ARD_TONE_WARNING, 'mkrIoTCarrier_Buzzer');
+    } else {
+      this.setWarningText(null, 'mkrIoTCarrier_Buzzer');
+    }
+  },
+  /** @return {!string} The type of input value for the block, an integer. */
+  getBlockType: function() {
+    return Blockly.Types.NUMBER;
   }
 };
