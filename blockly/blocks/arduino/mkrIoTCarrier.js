@@ -29,7 +29,7 @@ Blockly.Blocks['mkrIoTCarrier_led'] = {
     this.setHelpUrl('https://www.arduino.cc/education/explore-iot-kit');
     this.setColour(Blockly.Blocks.mkrIoTCarrier.HUE);
     this.appendDummyInput()
-        .appendField("set LED color ")
+        .appendField("set IOT Carrier LED color ")
     this.appendValueInput('LEDNUMBER')
         .setCheck(Blockly.Types.NUMBER.checkList)
         .appendField("LED Number");
@@ -46,5 +46,27 @@ Blockly.Blocks['mkrIoTCarrier_led'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip("Set one LED on the IOT Carrier");
+  }
+};
+
+
+Blockly.Blocks['mkrIoTCarrier_Buzzer'] = {
+  /**
+   * Block for controlling LEDS
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl('https://www.arduino.cc/education/explore-iot-kit');
+    this.setColour(Blockly.Blocks.mkrIoTCarrier.HUE);
+    this.appendDummyInput()
+        .appendField("Buzzer ")
+    this.appendValueInput('FREQUENCY')
+        .setCheck(Blockly.Types.NUMBER.checkList)
+        .appendField(Blockly.Msg.ARD_TONEFREQ)
+        .appendField("Frequency:");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip("Set frequency of Buzzer on the IOT Carrier");
   }
 };

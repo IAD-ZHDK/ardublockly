@@ -236,5 +236,6 @@ Ardublockly.TOOLBOX_XML =
 '    <block type="wifi_setup"></block>' +
 '    <block type="ifttt_setup"></block>' +
 '    <block type="mkrIoTCarrier_led"></block>' +
+'    <block type="mkrIoTCarrier_Buzzer"></block>' +
 '  </category>' +
 '</xml>';

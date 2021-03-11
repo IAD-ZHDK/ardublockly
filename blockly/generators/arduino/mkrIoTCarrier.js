@@ -22,18 +22,33 @@ var webHookCode = 'println("test");';
  */
 Blockly.Arduino['mkrIoTCarrier_led'] = function(block) {
  Blockly.Arduino.addInclude('Arduino_MKRIoTCarrier', '#include <Arduino_MKRIoTCarrier.h>');
-  var ledNumber = Blockly.Arduino.valueToCode(block, 'LEDNUMBER', Blockly.Arduino.ORDER_ATOMIC) || '0';
-  var red = Blockly.Arduino.valueToCode(block, 'RED', Blockly.Arduino.ORDER_ATOMIC) || '0';
-  var green =  Blockly.Arduino.valueToCode(block, 'GREEN', Blockly.Arduino.ORDER_ATOMIC) || '0';
-  var blue =  Blockly.Arduino.valueToCode(block, 'BLUE', Blockly.Arduino.ORDER_ATOMIC) || '0';
-  var code = `carrier.leds.setPixelColor(${ledNumber}`;
-  code += `, ${red}`;
-  code += `, ${green}`;
-  code += `, ${blue}`;
-  code += `);\n`;
-  code += `carrier.leds.show();\n`;
-  Blockly.Arduino.addVariable("MKRIoTCarrierObject",`MKRIoTCarrier carrier;`, true);
-  Blockly.Arduino.addSetup('carrierStart', 'carrier.begin();', true);
-  //carrier.leds.show();
-  return code;
+ var ledNumber = Blockly.Arduino.valueToCode(block, 'LEDNUMBER', Blockly.Arduino.ORDER_ATOMIC) || '0';
+ var red = Blockly.Arduino.valueToCode(block, 'RED', Blockly.Arduino.ORDER_ATOMIC) || '0';
+ var green =  Blockly.Arduino.valueToCode(block, 'GREEN', Blockly.Arduino.ORDER_ATOMIC) || '0';
+ var blue =  Blockly.Arduino.valueToCode(block, 'BLUE', Blockly.Arduino.ORDER_ATOMIC) || '0';
+ var code = `carrier.leds.setPixelColor(${ledNumber}`;
+ code += `, ${red}`;
+ code += `, ${green}`;
+ code += `, ${blue}`;
+ code += `);\n`;
+ code += `carrier.leds.show();\n`;
+ Blockly.Arduino.addVariable("MKRIoTCarrierObject",`MKRIoTCarrier carrier;`, true);
+ Blockly.Arduino.addSetup('carrierStart', 'carrier.begin();', true);
+ //carrier.leds.show();
+ return code;
+};
+
+Blockly.Arduino['mkrIoTCarrier_Buzzer'] = function(block) {
+ Blockly.Arduino.addInclude('Arduino_MKRIoTCarrier', '#include <Arduino_MKRIoTCarrier.h>');
+ var frequency = Blockly.Arduino.valueToCode(block, 'FREQUENCY', Blockly.Arduino.ORDER_ATOMIC) || '0';
+ if (frequency > 0) {
+  code = `carrier.Buzzer.sound(${frequency});\n`;
+ } else {
+  code = `carrier.Buzzer.noSound();\n`;
+ }
+ var code;
+ Blockly.Arduino.addVariable("MKRIoTCarrierObject",`MKRIoTCarrier carrier;`, true);
+ Blockly.Arduino.addSetup('carrierStart', 'carrier.begin();', true);
+ //carrier.leds.show();
+ return code;
 };
