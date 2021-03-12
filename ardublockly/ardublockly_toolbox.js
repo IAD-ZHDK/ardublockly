@@ -235,6 +235,7 @@ Ardublockly.TOOLBOX_XML =
 '  <category id="catCAS" name="CAS">' +
 '    <block type="wifi_setup"></block>' +
 '    <block type="mqtt_setup"></block>' +
+'    <block type="mqtt_publish"></block>' +
 '    <block type="ifttt_setup"></block>' +
 '    <block type="mkrIoTCarrier_led">' +
 '    <value name="LEDNUMBER">' +

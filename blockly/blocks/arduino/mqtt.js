@@ -47,3 +47,22 @@ Blockly.Blocks['mqtt_setup'] = {
     this.setTooltip("Begin MQTT connection with specified credentials.");
   }
 };
+
+Blockly.Blocks['mqtt_publish'] = {
+  /**
+   * Block for MQTT publish
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl('https://www.shiftr.io/docs/manuals/arduino/');
+    this.setColour(Blockly.Blocks.mqtt.HUE);
+    this.appendValueInput('PAYLOAD')
+        .appendField("on MQTT topic ")
+        .appendField(new Blockly.FieldTextInput("/"), 'TOPIC')
+        .appendField("publish")
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip("publish MQTT message");
+  }
+};

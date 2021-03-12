@@ -48,3 +48,17 @@ Blockly.Arduino['mqtt_setup'] = function(block) {
   var code = 'client.loop();';
   return code;
 };
+
+/**
+ * Code generator for block for publish payload on specific topic
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {array} Completed code.
+ */
+Blockly.Arduino['mqtt_publish'] = function(block) {
+  let topic = block.getFieldValue('TOPIC');
+  let payload = Blockly.Arduino.valueToCode(block, 'PAYLOAD', Blockly.Arduino.ORDER_ATOMIC) || '0';
+
+  let code = `client.publish("${topic}", ${payload});`;
+  return code;
+};
+
