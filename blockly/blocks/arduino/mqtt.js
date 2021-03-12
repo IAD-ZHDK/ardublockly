@@ -45,6 +45,7 @@ Blockly.Blocks['mqtt_setup'] = {
         .appendField(new Blockly.FieldTextInput(""), 'PASSWORD')
     this.setInputsInline(false);
     this.setTooltip("Begin MQTT connection with specified credentials.");
+    this.setNextStatement(true, null);
   }
 };
 
@@ -56,13 +57,43 @@ Blockly.Blocks['mqtt_publish'] = {
   init: function() {
     this.setHelpUrl('https://www.shiftr.io/docs/manuals/arduino/');
     this.setColour(Blockly.Blocks.mqtt.HUE);
-    this.appendValueInput('PAYLOAD')
+    this.appendValueInput('TOPIC')
         .appendField("on MQTT topic ")
-        .appendField(new Blockly.FieldTextInput("/"), 'TOPIC')
+    this.appendValueInput('PAYLOAD')
         .appendField("publish")
-    this.setInputsInline(false);
+        .setCheck(Blockly.Types.TEXT.checkList)
+    this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip("publish MQTT message");
   }
+};
+
+Blockly.Blocks['mqtt_subscribe'] = {
+  /**
+   * Block for MQTT subscribe
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "subscribe MQTT topic %2 to %1",
+      "args0": [
+        {
+          "type": "field_variable",
+          "name": "VAR",
+          "variable": Blockly.Msg.VARIABLES_DEFAULT_NAME
+        },
+        {
+          "type": "input_value",
+          "name": "TOPIC",
+          "check": Blockly.Types.TEXT.checkList,
+          "align": "RIGHT"
+        }
+      ],
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": Blockly.Blocks.mqtt.HUE,
+      "helpUrl": 'https://www.shiftr.io/docs/manuals/arduino/'
+    });
+  },
 };

@@ -33,11 +33,16 @@ Blockly.Arduino['mqtt_setup'] = function(block) {
 
   var setupSerial = `Serial.begin(9600);`;
   var mqttSetupCode = `client.begin("${broker}", ${port}, net);
+  client.onMessage(messageReceived);
   Serial.println("connecting to broker...");
   while (!client.connect("${device}", "${username}", "${password}")) {
     Serial.print(".");
     delay(1000);
   }`;
+
+  Blockly.Arduino.addFunction("messageReceived", `void messageReceived(String &topic, String &payload) {
+  Serial.println(topic + ": " + payload);
+}`)
 
   Blockly.Arduino.addVariable("wifiClient",`WiFiClient net;`);
   Blockly.Arduino.addVariable("mqttClient",`MQTTClient client;`);
@@ -55,10 +60,27 @@ Blockly.Arduino['mqtt_setup'] = function(block) {
  * @return {array} Completed code.
  */
 Blockly.Arduino['mqtt_publish'] = function(block) {
-  let topic = block.getFieldValue('TOPIC');
+  let topic = Blockly.Arduino.valueToCode(block, 'TOPIC', Blockly.Arduino.ORDER_ATOMIC);
   let payload = Blockly.Arduino.valueToCode(block, 'PAYLOAD', Blockly.Arduino.ORDER_ATOMIC) || '0';
 
-  let code = `client.publish("${topic}", ${payload});`;
+  let code = `client.publish(${topic}, ${payload});`;
   return code;
 };
 
+/**
+ * Code generator for block for publish payload on specific topic
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {array} Completed code.
+ */
+Blockly.Arduino['mqtt_subscribe'] = function(block) {
+  let variable = Blockly.Arduino.valueToCode(block, 'VAR', Blockly.Arduino.ORDER_ATOMIC);
+  let topic = Blockly.Arduino.valueToCode(block, 'TOPIC', Blockly.Arduino.ORDER_ATOMIC);
+
+  // todo: implement this!
+  console.log("not yet implemented!");
+
+  Blockly.Arduino.addSetup(`mqttSub_${topic}`, `client.subscribe(${topic});`)
+
+  let code = ``;
+  return code;
+};
