@@ -125,3 +125,43 @@ Blockly.Blocks['variables_set'] = {
     return Blockly.Types.getChildBlockType(this);
   }
 };
+
+Blockly.Blocks['variables_set_setup'] = {
+  /**
+   * Block for variable setter.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "set %1 to %2 in setup",
+      "args0": [
+        {
+          "type": "field_variable",
+          "name": "VAR",
+          "variable": Blockly.Msg.VARIABLES_DEFAULT_NAME
+        },
+        {
+          "type": "input_value",
+          "name": "VALUE"
+        }
+      ],
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": Blockly.Blocks.variables.HUE,
+      "tooltip": Blockly.Msg.VARIABLES_SET_TOOLTIP,
+      "helpUrl": Blockly.Msg.VARIABLES_SET_HELPURL
+    });
+    this.contextMenuMsg_ = Blockly.Msg.VARIABLES_SET_CREATE_GET;
+  },
+  contextMenuType_: 'variables_get',
+  customContextMenu: Blockly.Blocks['variables_get'].customContextMenu,
+  /**
+   * Searches through the nested blocks to find a variable type.
+   * @this Blockly.Block
+   * @param {!string} varName Name of this block variable to check type.
+   * @return {string} String to indicate the type of this block.
+   */
+  getVarType: function(varName) {
+    return Blockly.Types.getChildBlockType(this);
+  }
+};

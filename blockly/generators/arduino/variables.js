@@ -54,3 +54,21 @@ Blockly.Arduino['variables_set_type'] = function(block) {
   var code = '(' + varType + ')(' + argument0 + ')';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
+
+/**
+ * Code generator for defining variables.
+ * Arduino code: type X; setup { X = Y }
+ * @param {Blockly.Block} block Block to generate the code from.
+ * @return {string} Completed code.
+ */
+Blockly.Arduino['variables_set_setup'] = function(block) {
+  var argument0 = Blockly.Arduino.valueToCode(block, 'VALUE',
+      Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
+
+  var varName = Blockly.Arduino.variableDB_.getName(
+      block.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
+
+  Blockly.Arduino.addSetup(`set_${varName}`, `${varName} = ${argument0};\n`)
+
+  return ``
+};
