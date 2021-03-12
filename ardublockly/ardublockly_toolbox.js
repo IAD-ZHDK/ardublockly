@@ -117,6 +117,7 @@ Ardublockly.TOOLBOX_XML =
 '        <block type="variables_set_type"></block>' +
 '      </value>' +
 '    </block>' +
+'    <block type="variables_set_setup"></block>' +
 '    <block type="variables_set_type"></block>' +
 '  </category>' +
 '  <sep></sep>' +
@@ -236,6 +237,7 @@ Ardublockly.TOOLBOX_XML =
 '    <block type="wifi_setup"></block>' +
 '    <block type="mqtt_setup"></block>' +
 '    <block type="mqtt_publish"></block>' +
+'    <block type="mqtt_subscribe"></block>' +
 '    <block type="ifttt_setup"></block>' +
 '    <block type="mkrIoTCarrier_led">' +
 '    <value name="LEDNUMBER">' +
