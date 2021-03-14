@@ -159,7 +159,6 @@ Blockly.Blocks['spi_transfer'] = {
     var slaveNone = [[Blockly.Msg.ARD_SPI_TRANS_NONE, 'none']];
     field.menuGenerator_ =
         slaveNone.concat(Blockly.Arduino.Boards.selected['digitalPins']);
-
     var currentValuePresent = false;
     for (var i = 0, length_ = field.menuGenerator_.length; i < length_; i++) {
       if (fieldValue == field.menuGenerator_[i][1]) {

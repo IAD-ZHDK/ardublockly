@@ -16,9 +16,7 @@ goog.require('Blockly.Arduino');
 
 var webHookCode = 'println("test");';
 /**
- * Code generator for block for setting up the ifttt connection
- * @param {!Blockly.Block} block Block to generate the code from.
- * @return {array} Completed code.
+ * Code generator mkr IoT Carrier shield dot-star LEDS
  */
 Blockly.Arduino['mkrIoTCarrier_led'] = function(block) {
  Blockly.Arduino.addInclude('Arduino_MKRIoTCarrier', '#include <Arduino_MKRIoTCarrier.h>');
@@ -38,6 +36,9 @@ Blockly.Arduino['mkrIoTCarrier_led'] = function(block) {
  return code;
 };
 
+/**
+ * Code generator mkr IoT Carrier shield buzzer
+ */
 Blockly.Arduino['mkrIoTCarrier_Buzzer'] = function(block) {
  Blockly.Arduino.addInclude('Arduino_MKRIoTCarrier', '#include <Arduino_MKRIoTCarrier.h>');
  var frequency = Blockly.Arduino.valueToCode(block, 'FREQUENCY', Blockly.Arduino.ORDER_ATOMIC) || '0';
@@ -50,5 +51,36 @@ Blockly.Arduino['mkrIoTCarrier_Buzzer'] = function(block) {
  Blockly.Arduino.addVariable("MKRIoTCarrierObject",`MKRIoTCarrier carrier;`, true);
  Blockly.Arduino.addSetup('carrierStart', 'carrier.begin();', true);
  //carrier.leds.show();
+ return code;
+};
+
+/**
+ * Code generator mkr IoT Carrier IMU
+ */
+Blockly.Arduino['mkrIoTCarrier_IMU_Update'] = function(block) {
+ Blockly.Arduino.addInclude('Arduino_MKRIoTCarrier', '#include <Arduino_MKRIoTCarrier.h>');
+
+ Blockly.Arduino.addDeclaration("IMUXYZ",`float aX,aY,aZ;`);
+ var code = 'carrier.IMUmodule.readAcceleration(aX, aY, aZ);\n';
+ Blockly.Arduino.addVariable("MKRIoTCarrierObject",`MKRIoTCarrier carrier;`, true);
+ Blockly.Arduino.addSetup('carrierStart', 'carrier.begin();', true);
+ return code;
+};
+
+Blockly.Arduino['mkrIoTCarrier_IMU'] = function(block) {
+ Blockly.Arduino.addInclude('Arduino_MKRIoTCarrier', '#include <Arduino_MKRIoTCarrier.h>');
+ Blockly.Arduino.addDeclaration("IMUXYZ",`float aX,aY,aZ;`);
+ var Axis = block.getFieldValue("AXIS");
+ var code = `${Axis}`;
+ Blockly.Arduino.addVariable("MKRIoTCarrierObject",`MKRIoTCarrier carrier;`, true);
+ Blockly.Arduino.addSetup('carrierStart', 'carrier.begin();', true);
+ return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino['mkrIoTCarrier_SetScreenColor'] = function(block) {
+ Blockly.Arduino.addInclude('Arduino_MKRIoTCarrier', '#include <Arduino_MKRIoTCarrier.h>');
+ var Color = block.getFieldValue("COLOR");
+ var code = `carrier.display.fillScreen(${Color});\n`;
+ Blockly.Arduino.addVariable("MKRIoTCarrierObject",`MKRIoTCarrier carrier;`, true);
  return code;
 };

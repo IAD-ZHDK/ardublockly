@@ -18,7 +18,7 @@ goog.require('Blockly.Types');
 
 
 /** Common HSV hue for all blocks in this category. */
-Blockly.Blocks.mkrIoTCarrier.HUE = 30;
+Blockly.Blocks.mkrIoTCarrier.HUE = 360;
 
 Blockly.Blocks['mkrIoTCarrier_led'] = {
   /**
@@ -102,4 +102,59 @@ Blockly.Blocks['mkrIoTCarrier_Buzzer'] = {
   getBlockType: function() {
     return Blockly.Types.NUMBER;
   }
+};
+
+Blockly.Blocks['mkrIoTCarrier_IMU_Update'] = {
+  /**
+   * Block for IMU x,y,z
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl('https://www.arduino.cc/education/explore-iot-kit');
+    this.setColour(Blockly.Blocks.mkrIoTCarrier.HUE);
+
+    this.appendDummyInput()
+        .appendField("IMU update")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip("Sets the XYZ from the current IMU values");
+  },
+};
+
+
+Blockly.Blocks['mkrIoTCarrier_IMU'] = {
+  /**
+   * Block for IMU x,y,z
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl('https://www.arduino.cc/education/explore-iot-kit');
+    this.setColour(Blockly.Blocks.mkrIoTCarrier.HUE);
+    this.appendDummyInput()
+        .appendField("IMU axis:")
+        .appendField(new Blockly.FieldDropdown([['X', 'aX'], ['Y', 'aY'], ['Z', 'aZ']]), 'AXIS');
+    this.setOutput(true, Blockly.Types.DECIMAL.output);
+    this.setTooltip("Get the x, y, or z from the imu");
+  },
+  /** @return {string} The type of return value for the block, an integer. */
+  getBlockType: function() {
+    return Blockly.Types.DECIMAL;
+  },
+};
+
+Blockly.Blocks['mkrIoTCarrier_SetScreenColor'] = {
+  /**
+   * Block for IMU x,y,z
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl('https://www.arduino.cc/education/explore-iot-kit');
+    this.setColour(Blockly.Blocks.mkrIoTCarrier.HUE);
+    this.appendDummyInput()
+        .appendField("Set Screen Color")
+        .appendField(new Blockly.FieldDropdown([['BLACK,', 'ST77XX_BLACK'], ['WHITE', 'ST77XX_WHITE'], ['RED', 'ST77XX_RED'], ['GREEN', 'ST77XX_GREEN'], ['BLUE', 'ST77XX_BLUE'], ['CYAN', 'ST77XX_CYAN'], ['MAGENTA', 'ST77XX_MAGENTA'], ['YELLOW', 'ST77XX_YELLOW'], ['ORANGE', 'ST77XX_ORANGE']]), 'COLOR');
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip("Sets the screen color");
+  },
 };
