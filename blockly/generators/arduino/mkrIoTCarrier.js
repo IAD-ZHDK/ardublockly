@@ -77,6 +77,22 @@ Blockly.Arduino['mkrIoTCarrier_IMU'] = function(block) {
  return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
+Blockly.Arduino['mkrIoTCarrier_Humidity'] = function(block) {
+ Blockly.Arduino.addInclude('Arduino_MKRIoTCarrier', '#include <Arduino_MKRIoTCarrier.h>');
+ var code = `carrier.Env.readHumidity()`;
+ Blockly.Arduino.addVariable("MKRIoTCarrierObject",`MKRIoTCarrier carrier;`, true);
+ Blockly.Arduino.addSetup('carrierStart', 'carrier.begin();', true);
+ return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino['mkrIoTCarrier_Temperature'] = function(block) {
+ Blockly.Arduino.addInclude('Arduino_MKRIoTCarrier', '#include <Arduino_MKRIoTCarrier.h>');
+ var code = `carrier.Env.readTemperature()`;
+ Blockly.Arduino.addVariable("MKRIoTCarrierObject",`MKRIoTCarrier carrier;`, true);
+ Blockly.Arduino.addSetup('carrierStart', 'carrier.begin();', true);
+ return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
 Blockly.Arduino['mkrIoTCarrier_SetScreenColor'] = function(block) {
  Blockly.Arduino.addInclude('Arduino_MKRIoTCarrier', '#include <Arduino_MKRIoTCarrier.h>');
  var Color = block.getFieldValue("COLOR");

@@ -142,6 +142,44 @@ Blockly.Blocks['mkrIoTCarrier_IMU'] = {
   },
 };
 
+Blockly.Blocks['mkrIoTCarrier_Humidity'] = {
+  /**
+   * Block for humidity sensor
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl('https://www.arduino.cc/education/explore-iot-kit');
+    this.setColour(Blockly.Blocks.mkrIoTCarrier.HUE);
+    this.appendDummyInput()
+        .appendField("Humidity")
+    this.setOutput(true, Blockly.Types.DECIMAL.output);
+    this.setTooltip("Get Humidity %");
+  },
+  /** @return {string} The type of return value for the block, an integer. */
+  getBlockType: function() {
+    return Blockly.Types.DECIMAL;
+  },
+};
+
+Blockly.Blocks['mkrIoTCarrier_Temperature'] = {
+  /**
+   * Block for humidity sensor
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl('https://www.arduino.cc/education/explore-iot-kit');
+    this.setColour(Blockly.Blocks.mkrIoTCarrier.HUE);
+    this.appendDummyInput()
+        .appendField("Temperature")
+    this.setOutput(true, Blockly.Types.DECIMAL.output);
+    this.setTooltip("Get Temperature C");
+  },
+  /** @return {string} The type of return value for the block, an integer. */
+  getBlockType: function() {
+    return Blockly.Types.DECIMAL;
+  },
+};
+
 Blockly.Blocks['mkrIoTCarrier_SetScreenColor'] = {
   /**
    * Block for IMU x,y,z
