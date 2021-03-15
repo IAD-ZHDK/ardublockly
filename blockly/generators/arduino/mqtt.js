@@ -15,6 +15,8 @@ goog.provide('Blockly.Arduino.mqtt');
 goog.require('Blockly.Arduino');
 
 
+let messageReceivedName = "mqttMessageReceived";
+
 /**
  * Code generator for block for setting up the mqtt connection
  * @param {!Blockly.Block} block Block to generate the code from.
@@ -33,14 +35,14 @@ Blockly.Arduino['mqtt_setup'] = function(block) {
 
   var setupSerial = `Serial.begin(9600);`;
   var mqttSetupCode = `client.begin("${broker}", ${port}, net);
-  client.onMessage(messageReceived);
+  client.onMessage(${messageReceivedName});
   Serial.println("connecting to broker...");
   while (!client.connect("${device}", "${username}", "${password}")) {
     Serial.print(".");
     delay(1000);
   }`;
 
-  Blockly.Arduino.addFunction("messageReceived", `void messageReceived(String &topic, String &payload) {
+  Blockly.Arduino.addFunction(messageReceivedName, `void ${messageReceivedName}(String &topic, String &payload) {
   Serial.println(topic + ": " + payload);
 }`)
 
@@ -76,11 +78,11 @@ Blockly.Arduino['mqtt_subscribe'] = function(block) {
   let varName = Blockly.Arduino.variableDB_.getName(block.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
   let topic = Blockly.Arduino.valueToCode(block, 'TOPIC', Blockly.Arduino.ORDER_ATOMIC);
 
-  // todo: implement this!
-  console.log("not yet implemented!");
-  console.log(`varName: ${varName}`)
-
   Blockly.Arduino.addSetup(`mqttSub_${topic}`, `client.subscribe(${topic});`)
+  Blockly.Arduino.appendFunction(messageReceivedName, `  
+  if(topic.equals(${topic})) {
+    ${varName} = payload;
+  }`)
 
   let code = ``;
   return code;
