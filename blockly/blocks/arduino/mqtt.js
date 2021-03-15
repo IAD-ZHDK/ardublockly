@@ -73,27 +73,30 @@ Blockly.Blocks['mqtt_subscribe'] = {
   /**
    * Block for MQTT subscribe
    * @this Blockly.Block
+   *
    */
+
   init: function() {
-    this.jsonInit({
-      "message0": "subscribe MQTT topic %2 to %1",
-      "args0": [
-        {
-          "type": "field_variable",
-          "name": "VAR",
-          "variable": Blockly.Msg.VARIABLES_DEFAULT_NAME
-        },
-        {
-          "type": "input_value",
-          "name": "TOPIC",
-          "check": Blockly.Types.TEXT.checkList,
-          "align": "RIGHT"
-        }
-      ],
-      "previousStatement": null,
-      "nextStatement": null,
-      "colour": Blockly.Blocks.mqtt.HUE,
-      "helpUrl": 'https://www.shiftr.io/docs/manuals/arduino/'
+    this.setHelpUrl('https://www.shiftr.io/docs/manuals/arduino/');
+    this.setColour(Blockly.Blocks.mqtt.HUE);
+    this.appendValueInput('TOPIC')
+        .appendField("subscribe MQTT topic ")
+    this.appendDummyInput()
+        .appendField(" to ")
+        .appendField(new Blockly.FieldVariable(
+            Blockly.Msg.TEXT_APPEND_VARIABLE), 'VAR');
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setInputsInline(true);
+    // Assign 'this' to a variable for use in the tooltip closure below.
+    var thisBlock = this;
+    this.setTooltip(function() {
+      return Blockly.Msg.TEXT_APPEND_TOOLTIP.replace('%1',
+          thisBlock.getFieldValue('VAR'));
     });
   },
+
+  getVarType: function(varName) {
+    return Blockly.Types.TEXT;
+  }
 };

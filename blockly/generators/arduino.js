@@ -274,6 +274,28 @@ Blockly.Arduino.addFunction = function(preferedName, code) {
 };
 
 /**
+ * Adds a string of code to an existing function. It takes an identifier (meant to be the
+ * function name) to only keep a single copy even if multiple blocks might
+ * request this function to be created.
+ * @param {!string} preferedName Identifier for the function.
+ * @param {!string} addonCode Code to be added to the function.
+ * @return {!string} A unique function name based on input name.
+ */
+Blockly.Arduino.appendFunction = function(preferedName, addonCode) {
+  if (Blockly.Arduino.codeFunctions_[preferedName] === undefined) {
+    console.log(`AppendFunction: function ${preferedName} does not exist.`);
+  } else {
+    let uniqueName = Blockly.Arduino.variableDB_.getDistinctName(
+        preferedName, Blockly.Generator.NAME_TYPE);
+    let code = Blockly.Arduino.codeFunctions_[preferedName];
+    let newCode = code.substring(0, code.lastIndexOf("}")) + addonCode + "\n}"
+    Blockly.Arduino.codeFunctions_[preferedName] = newCode;
+    Blockly.Arduino.functionNames_[preferedName] = uniqueName;
+  }
+  return Blockly.Arduino.functionNames_[preferedName];
+};
+
+/**
  * Description.
  * @param {!Blockly.Block} block Description.
  * @param {!string} pin Description.
