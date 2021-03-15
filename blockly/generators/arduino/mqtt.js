@@ -73,11 +73,12 @@ Blockly.Arduino['mqtt_publish'] = function(block) {
  * @return {array} Completed code.
  */
 Blockly.Arduino['mqtt_subscribe'] = function(block) {
-  let variable = Blockly.Arduino.valueToCode(block, 'VAR', Blockly.Arduino.ORDER_ATOMIC);
+  let varName = Blockly.Arduino.variableDB_.getName(block.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
   let topic = Blockly.Arduino.valueToCode(block, 'TOPIC', Blockly.Arduino.ORDER_ATOMIC);
 
   // todo: implement this!
   console.log("not yet implemented!");
+  console.log(`varName: ${varName}`)
 
   Blockly.Arduino.addSetup(`mqttSub_${topic}`, `client.subscribe(${topic});`)
 
