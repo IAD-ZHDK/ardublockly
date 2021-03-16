@@ -104,6 +104,60 @@ Blockly.Blocks['mkrIoTCarrier_Buzzer'] = {
   }
 };
 
+Blockly.Blocks['mkrIoTCarrier_CaseBoolean'] = {
+  /**
+   * Block for case on carrier boolean
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl('https://www.arduino.cc/education/explore-iot-kit');
+    this.setColour(Blockly.Blocks.mkrIoTCarrier.HUE);
+    this.appendDummyInput()
+        .appendField("Case On:")
+        .appendField(new Blockly.FieldDropdown([['FALSE', 'false'], ['TRUE', 'true']]), 'CARRIER_CASE');
+    this.setNextStatement(true, null);
+    this.setTooltip("Check to TRUE if case is on for adjusted sensitivity");
+  },
+};
+
+Blockly.Blocks['mkrIoTCarrier_BTNS_Update'] = {
+  /**
+   * Block for updating Cap sens buttons
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl('https://www.arduino.cc/education/explore-iot-kit');
+    this.setColour(Blockly.Blocks.mkrIoTCarrier.HUE);
+
+    this.appendDummyInput()
+        .appendField("Buttons update")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip("Updates the button states");
+  },
+};
+
+Blockly.Blocks['mkrIoTCarrier_BTNS'] = {
+  /**
+   * Block for Cap sens buttons
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl('https://www.arduino.cc/education/explore-iot-kit');
+    this.setColour(Blockly.Blocks.mkrIoTCarrier.HUE);
+    this.appendDummyInput()
+        .appendField("Read button:")
+        .appendField(new Blockly.FieldDropdown([['0', 'Button0'], ['1', 'Button1'], ['2', 'Button2'], ['3', 'Button3'], ['4', 'Button4']]), 'BTNS');
+    this.setOutput(true, Blockly.Types.BOOLEAN.output);
+    this.setTooltip("Get a button state");
+  },
+  /** @return {string} The type of return value for the block, an integer. */
+  getBlockType: function() {
+    return Blockly.Types.BOOLEAN;
+  },
+};
+
+
 Blockly.Blocks['mkrIoTCarrier_IMU_Update'] = {
   /**
    * Block for IMU x,y,z

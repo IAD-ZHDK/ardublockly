@@ -54,6 +54,34 @@ Blockly.Arduino['mkrIoTCarrier_Buzzer'] = function(block) {
  return code;
 };
 
+Blockly.Arduino['mkrIoTCarrier_CaseBoolean'] = function(block) {
+ Blockly.Arduino.addInclude('Arduino_MKRIoTCarrier', '#include <Arduino_MKRIoTCarrier.h>');
+ var CASE = block.getFieldValue("CARRIER_CASE");
+ var code = `CARRIER_CASE = ${CASE};\n`;
+ Blockly.Arduino.addVariable("MKRIoTCarrierObject",`MKRIoTCarrier carrier;`, true);
+ Blockly.Arduino.addSetup('carrierStart', 'carrier.begin();', true);
+ return code;
+};
+
+Blockly.Arduino['mkrIoTCarrier_BTNS_Update'] = function(block) {
+ Blockly.Arduino.addInclude('Arduino_MKRIoTCarrier', '#include <Arduino_MKRIoTCarrier.h>');
+ var code = 'carrier.Buttons.update();\n';
+ Blockly.Arduino.addVariable("MKRIoTCarrierObject",`MKRIoTCarrier carrier;`, true);
+ Blockly.Arduino.addSetup('carrierStart', 'carrier.begin();', true);
+ return code;
+};
+
+Blockly.Arduino['mkrIoTCarrier_BTNS'] = function(block) {
+ Blockly.Arduino.addInclude('Arduino_MKRIoTCarrier', '#include <Arduino_MKRIoTCarrier.h>');
+ var Btns = block.getFieldValue("BTNS");
+ var code = `carrier.${Btns}.getTouch()`;
+ Blockly.Arduino.addVariable("MKRIoTCarrierObject",`MKRIoTCarrier carrier;`, true);
+ Blockly.Arduino.addSetup('carrierStart', 'carrier.begin();', true);
+ return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+
+
 /**
  * Code generator mkr IoT Carrier IMU
  */

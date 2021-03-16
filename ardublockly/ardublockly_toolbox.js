@@ -243,6 +243,9 @@ Ardublockly.TOOLBOX_XML =
 '    </block>' +
 '    <block type="mqtt_publish"></block>' +
 '    <block type="ifttt_setup"></block>' +
+'    <block type="mkrIoTCarrier_CaseBoolean"></block>' +
+'    <block type="mkrIoTCarrier_BTNS_Update"></block>' +
+'    <block type="mkrIoTCarrier_BTNS"></block>' +
 '    <block type="mkrIoTCarrier_SetScreenColor"></block>' +
 '    <block type="mkrIoTCarrier_IMU"></block>' +
 '    <block type="mkrIoTCarrier_IMU_Update"></block>' +
