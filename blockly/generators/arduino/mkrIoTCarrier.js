@@ -14,7 +14,6 @@ goog.provide('Blockly.Arduino.mkrIoTCarrier_led');
 
 goog.require('Blockly.Arduino');
 
-var webHookCode = 'println("test");';
 /**
  * Code generator mkr IoT Carrier shield dot-star LEDS
  */

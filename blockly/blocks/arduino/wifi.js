@@ -37,3 +37,44 @@ Blockly.Blocks['wifi_setup'] = {
     this.setTooltip("Begin wifi connection with specified credentials.");
   }
 };
+
+
+Blockly.Blocks['Nina_led'] = {
+  /**
+   * Block for controlling LEDS
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl('https://store.arduino.cc/arduino-mkr-wifi-1010');
+    this.setColour(Blockly.Blocks.mkrIoTCarrier.HUE);
+    this.appendDummyInput()
+        .appendField("MKR1010 LED:")
+    this.appendValueInput('RED')
+        .setCheck(Blockly.Types.NUMBER.checkList)
+        .appendField("red: ");
+    this.appendValueInput('GREEN')
+        .setCheck(Blockly.Types.NUMBER.checkList)
+        .appendField("green: ");
+    this.appendValueInput('BLUE')
+        .setCheck(Blockly.Types.NUMBER.checkList)
+        .appendField("blue:");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip("set MKR1010 RGB LED color");
+  },
+
+  onchange: function(event) {
+    if (!this.workspace || event.type == Blockly.Events.MOVE ||
+        event.type == Blockly.Events.UI) {
+      return;  // Block deleted or irrelevant event
+    }
+    var ID = Blockly.Arduino.valueToCode(
+        this, "LEDNUMBER", Blockly.Arduino.ORDER_ATOMIC)
+    if (ID > 4) {
+      this.setWarningText("LEDs can only have an ID of 0, 1, 2, 3 or 4", 'mkrIoTCarrier_led');
+    }  else {
+      this.setWarningText(null, 'mkrIoTCarrier_led');
+    }
+  },
+};
