@@ -46,7 +46,7 @@ Blockly.Blocks['Nina_led'] = {
    */
   init: function() {
     this.setHelpUrl('https://store.arduino.cc/arduino-mkr-wifi-1010');
-    this.setColour(Blockly.Blocks.mkrIoTCarrier.HUE);
+    this.setColour(Blockly.Blocks.wifi.HUE);
     this.appendDummyInput()
         .appendField("MKR1010 LED:")
     this.appendValueInput('RED')

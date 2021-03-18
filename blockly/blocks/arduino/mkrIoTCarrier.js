@@ -29,19 +29,19 @@ Blockly.Blocks['mkrIoTCarrier_led'] = {
     this.setHelpUrl('https://www.arduino.cc/education/explore-iot-kit');
     this.setColour(Blockly.Blocks.mkrIoTCarrier.HUE);
     this.appendDummyInput()
-        .appendField("set IOT Carrier LED color ")
+        .appendField("Carrier LED")
     this.appendValueInput('LEDNUMBER')
         .setCheck(Blockly.Types.NUMBER.checkList)
-        .appendField("LED Number");
+        .appendField("ID:");
     this.appendValueInput('RED')
         .setCheck(Blockly.Types.NUMBER.checkList)
-        .appendField("red: ");
+        .appendField("R:");
     this.appendValueInput('GREEN')
         .setCheck(Blockly.Types.NUMBER.checkList)
-        .appendField("green: ");
+        .appendField("G:");
     this.appendValueInput('BLUE')
         .setCheck(Blockly.Types.NUMBER.checkList)
-        .appendField("blue:");
+        .appendField("B:");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -209,7 +209,7 @@ Blockly.Blocks['mkrIoTCarrier_Humidity'] = {
     this.setOutput(true, Blockly.Types.DECIMAL.output);
     this.setTooltip("Get Humidity %");
   },
-  /** @return {string} The type of return value for the block, an integer. */
+  /** @return {string} The type of return value for the block, an float. */
   getBlockType: function() {
     return Blockly.Types.DECIMAL;
   },
@@ -228,15 +228,71 @@ Blockly.Blocks['mkrIoTCarrier_Temperature'] = {
     this.setOutput(true, Blockly.Types.DECIMAL.output);
     this.setTooltip("Get Temperature C");
   },
-  /** @return {string} The type of return value for the block, an integer. */
+  /** @return {string} The type of return value for the block, a float. */
   getBlockType: function() {
     return Blockly.Types.DECIMAL;
   },
 };
 
+Blockly.Blocks['mkrIoTCarrier_Pressure'] = {
+  /**
+   * Block for Barometric sensor
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl('https://www.arduino.cc/education/explore-iot-kit');
+    this.setColour(Blockly.Blocks.mkrIoTCarrier.HUE);
+    this.appendDummyInput()
+        .appendField("Pressure")
+    this.setOutput(true, Blockly.Types.NUMBER.output);
+    this.setTooltip("Get Temperature hectopascal");
+  },
+  /** @return {string} The type of return value for the block, an integer. */
+  getBlockType: function() {
+    return Blockly.Types.NUMBER;
+  },
+};
+
+
+Blockly.Blocks['mkrIoTCarrier_Relay'] = {
+  /**
+   * Block for controlling Relays
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl('https://www.arduino.cc/education/explore-iot-kit');
+    this.setColour(Blockly.Blocks.mkrIoTCarrier.HUE);
+    this.appendDummyInput()
+        .appendField("Set Relay number:")
+    this.appendValueInput('RELAY_NUMBER')
+        .setCheck(Blockly.Types.NUMBER.checkList)
+    this.appendDummyInput()
+        .appendField("open:")
+        .appendField(new Blockly.FieldDropdown([['Open', 'open'], ['Closed', 'close']]), 'STATE');
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip("Set one Relay on the IOT Carrier to open or closed");
+  },
+
+  onchange: function(event) {
+    if (!this.workspace || event.type == Blockly.Events.MOVE ||
+        event.type == Blockly.Events.UI) {
+      return;  // Block deleted or irrelevant event
+    }
+    var ID = Blockly.Arduino.valueToCode(
+        this, "RELAY_NUMBER", Blockly.Arduino.ORDER_ATOMIC)
+    if (ID > 2 || ID < 1 ) {
+      this.setWarningText("Relays can only have an ID of 1 or 2", 'mkrIoTCarrier_Relay');
+    }  else {
+      this.setWarningText(null, 'mkrIoTCarrier_Relay');
+    }
+  },
+};
+
 Blockly.Blocks['mkrIoTCarrier_SetScreenColor'] = {
   /**
-   * Block for IMU x,y,z
+   * Block for screen color
    * @this Blockly.Block
    */
   init: function() {
@@ -244,9 +300,27 @@ Blockly.Blocks['mkrIoTCarrier_SetScreenColor'] = {
     this.setColour(Blockly.Blocks.mkrIoTCarrier.HUE);
     this.appendDummyInput()
         .appendField("Set Screen Color")
-        .appendField(new Blockly.FieldDropdown([['BLACK,', 'ST77XX_BLACK'], ['WHITE', 'ST77XX_WHITE'], ['RED', 'ST77XX_RED'], ['GREEN', 'ST77XX_GREEN'], ['BLUE', 'ST77XX_BLUE'], ['CYAN', 'ST77XX_CYAN'], ['MAGENTA', 'ST77XX_MAGENTA'], ['YELLOW', 'ST77XX_YELLOW'], ['ORANGE', 'ST77XX_ORANGE']]), 'COLOR');
+        .appendField(new Blockly.FieldDropdown([['BLACK', 'ST77XX_BLACK'], ['WHITE', 'ST77XX_WHITE'], ['RED', 'ST77XX_RED'], ['GREEN', 'ST77XX_GREEN'], ['BLUE', 'ST77XX_BLUE'], ['CYAN', 'ST77XX_CYAN'], ['MAGENTA', 'ST77XX_MAGENTA'], ['YELLOW', 'ST77XX_YELLOW'], ['ORANGE', 'ST77XX_ORANGE']]), 'COLOR');
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip("Sets the screen color");
+  },
+};
+
+Blockly.Blocks['mkrIoTCarrier_SetScreenText'] = {
+  /**
+   * Block for screen text
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl('https://www.arduino.cc/education/explore-iot-kit');
+    this.setColour(Blockly.Blocks.mkrIoTCarrier.HUE);
+    this.appendDummyInput()
+        .appendField("Text Color")
+        .appendField(new Blockly.FieldDropdown([['BLACK', 'ST77XX_BLACK'], ['WHITE', 'ST77XX_WHITE'], ['RED', 'ST77XX_RED'], ['GREEN', 'ST77XX_GREEN'], ['BLUE', 'ST77XX_BLUE'], ['CYAN', 'ST77XX_CYAN'], ['MAGENTA', 'ST77XX_MAGENTA'], ['YELLOW', 'ST77XX_YELLOW'], ['ORANGE', 'ST77XX_ORANGE']]), 'COLOR');
+    this.appendValueInput('CONTENT');
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip("Sets text on the screen");
   },
 };
