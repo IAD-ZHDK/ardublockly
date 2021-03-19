@@ -12,7 +12,7 @@ This is all packaged in a self contained executable desktop application for Wind
 ### MacOS
 
 ```bash
-bash <(curl -s http://mywebsite.com/myscript.txt)
+bash <(curl -s https://raw.githubusercontent.com/IAD-ZHDK/ardublockly/master/quickstart/quickstart.sh)
 ```
 
 
