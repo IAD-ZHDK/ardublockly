@@ -42,14 +42,15 @@ Blockly.Arduino['wifi_setup'] = function(block) {
 
 
 Blockly.Arduino['Nina_led'] = function(block) {
+  Blockly.Arduino.addInclude('wifiNina', '#include <WiFiNINA.h>');
   Blockly.Arduino.addInclude('wifi_drv', '#include <utility/wifi_drv.h>');
   var red = Blockly.Arduino.valueToCode(block, 'RED', Blockly.Arduino.ORDER_ATOMIC) || '0';
   var green =  Blockly.Arduino.valueToCode(block, 'GREEN', Blockly.Arduino.ORDER_ATOMIC) || '0';
   var blue =  Blockly.Arduino.valueToCode(block, 'BLUE', Blockly.Arduino.ORDER_ATOMIC) || '0';
-  var code = `WiFiDrv::analogWrite(25, ${red});\n`;
-  code += `WiFiDrv::analogWrite(26, ${green});\n`;
+  var code = `WiFiDrv::analogWrite(26, ${red});\n`;
+  code += `WiFiDrv::analogWrite(25, ${green});\n`;
   code += `WiFiDrv::analogWrite(27, ${blue});\n`;
-  Blockly.Arduino.addVariable("MKRIoTCarrierObject",`MKRIoTCarrier carrier;`, true);
+
   Blockly.Arduino.addSetup('wifiLEDpins', 'WiFiDrv::pinMode(25, OUTPUT);  //GREEN\n' +
       'WiFiDrv::pinMode(26, OUTPUT);  //RED\n' +
       'WiFiDrv::pinMode(27, OUTPUT);  //BLUE', true);
