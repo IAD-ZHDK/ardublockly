@@ -1,0 +1,14 @@
+altgraph==0.17
+bottle==0.12.19
+future==0.18.2
+importlib-metadata==3.7.3
+iso8601==0.1.14
+macholib==1.14
+pyinstaller==4.2
+pyinstaller-hooks-contrib==2021.1
+pyserial==3.5
+PyYAML==5.4.1
+six==1.15.0
+typing-extensions==3.7.4.3
+waitress==2.0.0
+zipp==3.4.1
