@@ -52,8 +52,7 @@ Blockly.Arduino['Nina_led'] = function(block) {
   code += `WiFiDrv::analogWrite(27, ${blue});\n`;
 
   Blockly.Arduino.addSetup('wifiLEDpins', 'WiFiDrv::pinMode(25, OUTPUT);  //GREEN\n' +
-      'WiFiDrv::pinMode(26, OUTPUT);  //RED\n' +
-      'WiFiDrv::pinMode(27, OUTPUT);  //BLUE', true);
-  //carrier.leds.show();
+      '  WiFiDrv::pinMode(26, OUTPUT);  //RED\n' +
+      '  WiFiDrv::pinMode(27, OUTPUT);  //BLUE', true);
   return code;
 };
