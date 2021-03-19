@@ -225,6 +225,16 @@ Ardublockly.discardAllBlocks = function() {
   }
 };
 
+Ardublockly.copyToClipboard = function() {
+  let code = Ardublockly.generateArduino();
+  const el = document.createElement('textarea');
+  el.value = code;
+  document.body.appendChild(el);
+  el.select();
+  document.execCommand('copy');
+  document.body.removeChild(el);
+}
+
 /** @return {!boolean} Indicates if the Blockly workspace has blocks. */
 Ardublockly.isWorkspaceEmpty = function() {
   return Ardublockly.workspace.getAllBlocks().length ? false : true;
