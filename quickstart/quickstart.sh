@@ -23,5 +23,6 @@ unzip-from-link https://github.com/IAD-ZHDK/ardublockly/archive/master.zip "$PWD
 rm master.zip
 
 pushd "$ROOT_DIR"
+git submodule update --init --recursive
 python start.py
 popd
