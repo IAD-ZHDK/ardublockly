@@ -7,6 +7,14 @@ This is all packaged in a self contained executable desktop application for Wind
 
 ![Ardublockly desktop program screenshot][desktop_screeshot]
 
+## Quickstart
+
+### MacOS
+
+```bash
+bash <(curl -s http://mywebsite.com/myscript.txt)
+```
+
 
 ## Features
 * Generates Arduino code with visual drag-and-drop blocks
