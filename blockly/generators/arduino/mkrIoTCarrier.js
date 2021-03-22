@@ -127,20 +127,47 @@ Blockly.Arduino['mkrIoTCarrier_Pressure'] = function(block) {
  return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
+Blockly.Arduino['mkrIoTCarrier_readColor_Update'] = function(block) {
+ Blockly.Arduino.addInclude('Arduino_MKRIoTCarrier', '#include <Arduino_MKRIoTCarrier.h>');
+ Blockly.Arduino.addDeclaration("RGBLIGHT",`int r,g,b,light;`);
+ var code = 'while (! carrier.Light.colorAvailable()) {\n' +
+     '    delay(5);\n' +
+     '  }\n'
+ code += 'carrier.Light.readColor(r,g,b,light);\n';
+ Blockly.Arduino.addVariable("MKRIoTCarrierObject",`MKRIoTCarrier carrier;`, true);
+ Blockly.Arduino.addSetup('carrierStart', 'carrier.begin();', true);
+ return code;
+};
+
+Blockly.Arduino['mkrIoTCarrier_readColor'] = function(block) {
+ Blockly.Arduino.addInclude('Arduino_MKRIoTCarrier', '#include <Arduino_MKRIoTCarrier.h>');
+ Blockly.Arduino.addDeclaration("RGBLIGHT",`int r,g,b,light;`);
+ var chanel = block.getFieldValue("CHANEL");
+ var code = `${chanel}`;
+ Blockly.Arduino.addVariable("MKRIoTCarrierObject",`MKRIoTCarrier carrier;`, true);
+ Blockly.Arduino.addSetup('carrierStart', 'carrier.begin();', true);
+ return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
 Blockly.Arduino['mkrIoTCarrier_SetScreenColor'] = function(block) {
  Blockly.Arduino.addInclude('Arduino_MKRIoTCarrier', '#include <Arduino_MKRIoTCarrier.h>');
  var Color = block.getFieldValue("COLOR");
  var code = `carrier.display.fillScreen(${Color});\n`;
  Blockly.Arduino.addVariable("MKRIoTCarrierObject",`MKRIoTCarrier carrier;`, true);
+ Blockly.Arduino.addSetup('carrierStart', 'carrier.begin();', true);
  return code;
 };
 Blockly.Arduino['mkrIoTCarrier_SetScreenText'] = function(block) {
  Blockly.Arduino.addInclude('Arduino_MKRIoTCarrier', '#include <Arduino_MKRIoTCarrier.h>');
- var Color = block.getFieldValue("COLOR");
+ var color = block.getFieldValue("COLOR");
+ var size = block.getFieldValue("SIZE");
  var content = Blockly.Arduino.valueToCode(block, 'CONTENT', Blockly.Arduino.ORDER_ATOMIC) || '0';
- var code = `carrier.display.setCursor(70, 100);\n`;
+ var code = `carrier.display.setTextColor(${color});\n`;
+ code +=  `carrier.display.setTextSize(${size});\n`;
+ code += `carrier.display.setCursor(0, 0);\n`;
  code += `carrier.display.print(${content});\n`;
  Blockly.Arduino.addVariable("MKRIoTCarrierObject",`MKRIoTCarrier carrier;`, true);
+ Blockly.Arduino.addSetup('carrierStart', 'carrier.begin();', true);
  return code;
 };
 /**

@@ -253,6 +253,44 @@ Blockly.Blocks['mkrIoTCarrier_Pressure'] = {
   },
 };
 
+Blockly.Blocks['mkrIoTCarrier_readColor_Update'] = {
+  /**
+   * Block for updating ambient light sensor
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl('https://www.arduino.cc/education/explore-iot-kit');
+    this.setColour(Blockly.Blocks.mkrIoTCarrier.HUE);
+
+    this.appendDummyInput()
+        .appendField("Ambient light readings update")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip("Update Ambient light color readings");
+  },
+};
+
+
+Blockly.Blocks['mkrIoTCarrier_readColor'] = {
+  /**
+   * Block for ambient light sensor
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl('https://www.arduino.cc/education/explore-iot-kit');
+    this.setColour(Blockly.Blocks.mkrIoTCarrier.HUE);
+    this.appendDummyInput()
+        .appendField("Color Chanel:")
+        .appendField(new Blockly.FieldDropdown([['r', 'r'], ['g', 'g'], ['b', 'b'], ['intensity', 'light']]), 'CHANEL');
+    this.setOutput(true, Blockly.Types.NUMBER.output);
+    this.setTooltip("Get the r, g, or b or light intensity from the APDS9960 sensor");
+  },
+  /** @return {string} The type of return value for the block, an integer. */
+  getBlockType: function() {
+    return Blockly.Types.NUMBER;
+  },
+};
+
 
 Blockly.Blocks['mkrIoTCarrier_Relay'] = {
   /**
@@ -316,8 +354,11 @@ Blockly.Blocks['mkrIoTCarrier_SetScreenText'] = {
     this.setHelpUrl('https://www.arduino.cc/education/explore-iot-kit');
     this.setColour(Blockly.Blocks.mkrIoTCarrier.HUE);
     this.appendDummyInput()
-        .appendField("Text Color")
+        .appendField("Text Color:")
         .appendField(new Blockly.FieldDropdown([['BLACK', 'ST77XX_BLACK'], ['WHITE', 'ST77XX_WHITE'], ['RED', 'ST77XX_RED'], ['GREEN', 'ST77XX_GREEN'], ['BLUE', 'ST77XX_BLUE'], ['CYAN', 'ST77XX_CYAN'], ['MAGENTA', 'ST77XX_MAGENTA'], ['YELLOW', 'ST77XX_YELLOW'], ['ORANGE', 'ST77XX_ORANGE']]), 'COLOR');
+    this.appendDummyInput()
+        .appendField("Size:")
+        .appendField(new Blockly.FieldDropdown([['1', '1'], ['2', '2'], ['4', '4'], ['6', '6'], ['8', '8']]), 'SIZE');
     this.appendValueInput('CONTENT');
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
