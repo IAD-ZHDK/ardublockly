@@ -255,7 +255,7 @@ Blockly.Blocks['mkrIoTCarrier_Pressure'] = {
 
 Blockly.Blocks['mkrIoTCarrier_readColor_Update'] = {
   /**
-   * Block for updating ambient light sensor
+   * Block for updating APDS9960 ambient light sensor
    * @this Blockly.Block
    */
   init: function() {
@@ -263,7 +263,7 @@ Blockly.Blocks['mkrIoTCarrier_readColor_Update'] = {
     this.setColour(Blockly.Blocks.mkrIoTCarrier.HUE);
 
     this.appendDummyInput()
-        .appendField("Ambient light readings update")
+        .appendField("Ambient light update")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip("Update Ambient light color readings");
@@ -273,14 +273,14 @@ Blockly.Blocks['mkrIoTCarrier_readColor_Update'] = {
 
 Blockly.Blocks['mkrIoTCarrier_readColor'] = {
   /**
-   * Block for ambient light sensor
+   * Block for APDS9960 ambient light sensor
    * @this Blockly.Block
    */
   init: function() {
     this.setHelpUrl('https://www.arduino.cc/education/explore-iot-kit');
     this.setColour(Blockly.Blocks.mkrIoTCarrier.HUE);
     this.appendDummyInput()
-        .appendField("Color Chanel:")
+        .appendField("Ambiant light chanel:")
         .appendField(new Blockly.FieldDropdown([['r', 'r'], ['g', 'g'], ['b', 'b'], ['intensity', 'light']]), 'CHANEL');
     this.setOutput(true, Blockly.Types.NUMBER.output);
     this.setTooltip("Get the r, g, or b or light intensity from the APDS9960 sensor");
@@ -290,6 +290,26 @@ Blockly.Blocks['mkrIoTCarrier_readColor'] = {
     return Blockly.Types.NUMBER;
   },
 };
+
+Blockly.Blocks['mkrIoTCarrier_Proximity'] = {
+    /**
+     * Block for reading APDS9960 proximity sensor
+     * @this Blockly.Block
+     */
+    init: function() {
+      this.setHelpUrl('https://www.arduino.cc/education/explore-iot-kit');
+      this.setColour(Blockly.Blocks.mkrIoTCarrier.HUE);
+
+      this.appendDummyInput()
+          .appendField("Proximity Sensor Distance")
+      this.setOutput(true, Blockly.Types.NUMBER.output);
+      this.setTooltip("0 to 255, where 255 is the furthest. -1 is an error");
+    },
+    getBlockType: function() {
+      return Blockly.Types.NUMBER;
+    },
+  };
+
 
 
 Blockly.Blocks['mkrIoTCarrier_Relay'] = {

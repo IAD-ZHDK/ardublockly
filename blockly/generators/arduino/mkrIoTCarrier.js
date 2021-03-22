@@ -139,11 +139,26 @@ Blockly.Arduino['mkrIoTCarrier_readColor_Update'] = function(block) {
  return code;
 };
 
+
 Blockly.Arduino['mkrIoTCarrier_readColor'] = function(block) {
  Blockly.Arduino.addInclude('Arduino_MKRIoTCarrier', '#include <Arduino_MKRIoTCarrier.h>');
  Blockly.Arduino.addDeclaration("RGBLIGHT",`int r,g,b,light;`);
  var chanel = block.getFieldValue("CHANEL");
  var code = `${chanel}`;
+ Blockly.Arduino.addVariable("MKRIoTCarrierObject",`MKRIoTCarrier carrier;`, true);
+ Blockly.Arduino.addSetup('carrierStart', 'carrier.begin();', true);
+ return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino['mkrIoTCarrier_Proximity'] = function(block) {
+ Blockly.Arduino.addInclude('Arduino_MKRIoTCarrier', '#include <Arduino_MKRIoTCarrier.h>');
+ Blockly.Arduino.addFunction("PROX",`int proximity() {\n
+  while (!APDS.proximityAvailable()) {\n
+    delay(5);\n
+  }\n
+  return APDS.readProximity();\n
+};\n`);
+ var code = `proximity()`;
  Blockly.Arduino.addVariable("MKRIoTCarrierObject",`MKRIoTCarrier carrier;`, true);
  Blockly.Arduino.addSetup('carrierStart', 'carrier.begin();', true);
  return [code, Blockly.Arduino.ORDER_ATOMIC];

@@ -246,6 +246,7 @@ Ardublockly.TOOLBOX_XML =
     '    <block type="mkrIoTCarrier_Pressure"></block>' +
     '    <block type="mkrIoTCarrier_readColor_Update"></block>' +
     '    <block type="mkrIoTCarrier_readColor"></block>' +
+    '    <block type="mkrIoTCarrier_Proximity"></block>' +
     '    <block type="mkrIoTCarrier_Relay"></block>' +
     '    <block type="mkrIoTCarrier_led">' +
     '    <value name="LEDNUMBER">' +
