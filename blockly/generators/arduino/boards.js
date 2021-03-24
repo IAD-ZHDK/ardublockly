@@ -124,7 +124,6 @@ Blockly.Arduino.Boards.profiles.uno_wifi_rev_2 =
     );
 
 /** Arduino MKR WiFi 1010 board profile (SAMD21).*/
-/** TODO: A6 not listed on analog read block */
 Blockly.Arduino.Boards.profiles.mkr_wifi_1010 = {
   name: 'Arduino MKR WiFi 1010',
   description: 'Arduino MKR with SAMD21 Cortex®-M0+ 32bit low power ARM MCU board',
@@ -350,7 +349,7 @@ Blockly.Arduino.Boards.profiles.esp8266_wemos_d1 = {
 };
 
 /** Set default profile to Arduino standard-compatible board */
-Blockly.Arduino.Boards.selected = Blockly.Arduino.Boards.profiles.uno;
+Blockly.Arduino.Boards.selected = Blockly.Arduino.Boards.profiles.mkr_wifi_1010;
 
 /**
  * Changes the Arduino board profile selected, which trigger a refresh of the
