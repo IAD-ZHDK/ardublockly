@@ -281,7 +281,23 @@ Ardublockly.TOOLBOX_XML =
     '  <category id="catCAS" name="CAS">' +
     '    <block type="wifi_setup"></block>' +
     '    <block type="mqtt_setup"></block>' +
-    '    <block type="Nina_led"></block>' +
+    '    <block type="Nina_led">' +
+    '    <value name="RED">' +
+    '        <shadow type="math_number">' +
+    '          <field name="NUM">0</field>' +
+    '        </shadow>' +
+    '      </value>' +
+    '    <value name="GREEN">' +
+    '        <shadow type="math_number">' +
+    '          <field name="NUM">0</field>' +
+    '        </shadow>' +
+    '      </value>' +
+    '    <value name="BLUE">' +
+    '        <shadow type="math_number">' +
+    '          <field name="NUM">0</field>' +
+    '        </shadow>' +
+    '      </value>' +
+    '</block>' +
     '    <block type="mqtt_subscribe">' +
     '      <value name="TOPIC">' +
     '        <block type="text"></block>' +
