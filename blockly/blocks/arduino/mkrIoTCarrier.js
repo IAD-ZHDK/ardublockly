@@ -60,6 +60,17 @@ Blockly.Blocks['mkrIoTCarrier_led'] = {
     }  else {
       this.setWarningText(null, 'mkrIoTCarrier_led');
     }
+    var r = Blockly.Arduino.valueToCode(
+        this, "RED", Blockly.Arduino.ORDER_ATOMIC)
+    var g = Blockly.Arduino.valueToCode(
+        this, "GREEN", Blockly.Arduino.ORDER_ATOMIC)
+    var b = Blockly.Arduino.valueToCode(
+        this, "BLUE", Blockly.Arduino.ORDER_ATOMIC)
+    if (r > 255 ||g > 255||b > 255 ) {
+      this.setWarningText("LEDs chanels can only have a value of 0 to 255", 'mkrIoTCarrier_led');
+    }  else {
+      this.setWarningText(null, 'mkrIoTCarrier_led');
+    }
   },
 };
 
@@ -149,7 +160,7 @@ Blockly.Blocks['mkrIoTCarrier_BTNS'] = {
         .appendField("Read button:")
         .appendField(new Blockly.FieldDropdown([['0', 'Button0'], ['1', 'Button1'], ['2', 'Button2'], ['3', 'Button3'], ['4', 'Button4']]), 'BTNS');
     this.setOutput(true, Blockly.Types.BOOLEAN.output);
-    this.setTooltip("Get a button state");
+    this.setTooltip("Get a button state (true or false)");
   },
   /** @return {string} The type of return value for the block, an integer. */
   getBlockType: function() {
@@ -309,6 +320,25 @@ Blockly.Blocks['mkrIoTCarrier_Proximity'] = {
       return Blockly.Types.NUMBER;
     },
   };
+Blockly.Blocks['mkrIoTCarrier_Gesture'] = {
+  /**
+   * Block for reading APDS9960 Gesture sensor
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl('https://www.arduino.cc/education/explore-iot-kit');
+    this.setColour(Blockly.Blocks.mkrIoTCarrier.HUE);
+
+    this.appendDummyInput()
+        .appendField("Gesture Sensor")
+    this.setOutput(true, Blockly.Types.NUMBER.output);
+    this.setTooltip("recogise up, down, left and right gestures");
+  },
+  getBlockType: function() {
+    return Blockly.Types.NUMBER;
+  },
+};
+
 
 
 

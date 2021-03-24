@@ -164,6 +164,20 @@ Blockly.Arduino['mkrIoTCarrier_Proximity'] = function(block) {
  return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
+Blockly.Arduino['mkrIoTCarrier_Gesture'] = function(block) {
+ Blockly.Arduino.addInclude('Arduino_MKRIoTCarrier', '#include <Arduino_MKRIoTCarrier.h>');
+ Blockly.Arduino.addFunction("GEST",`int gesture() {\n
+  while (!APDS.gestureAvailable()) {\n
+    delay(5);\n
+  }\n
+  return APDS.readGesture();\n
+};\n`);
+ var code = `gesture()`;
+ Blockly.Arduino.addVariable("MKRIoTCarrierObject",`MKRIoTCarrier carrier;`, true);
+ Blockly.Arduino.addSetup('carrierStart', 'carrier.begin();', true);
+ return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
 Blockly.Arduino['mkrIoTCarrier_SetScreenColor'] = function(block) {
  Blockly.Arduino.addInclude('Arduino_MKRIoTCarrier', '#include <Arduino_MKRIoTCarrier.h>');
  var Color = block.getFieldValue("COLOR");
