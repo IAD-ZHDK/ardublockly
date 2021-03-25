@@ -299,6 +299,23 @@ Ardublockly.TOOLBOX_XML =
     '        </shadow>' +
     '      </value>' +
     '</block>' +
+    '    <block type="Nina_led_hsb">' +
+    '    <value name="HUE">' +
+    '        <shadow type="math_number">' +
+    '          <field name="NUM">0</field>' +
+    '        </shadow>' +
+    '      </value>' +
+    '    <value name="SATURATION">' +
+    '        <shadow type="math_number">' +
+    '          <field name="NUM">80</field>' +
+    '        </shadow>' +
+    '      </value>' +
+    '    <value name="BRIGHTNESS">' +
+    '        <shadow type="math_number">' +
+    '          <field name="NUM">100</field>' +
+    '        </shadow>' +
+    '      </value>' +
+    '</block>' +
     '    <block type="mqtt_subscribe">' +
     '      <value name="TOPIC">' +
     '        <block type="text"></block>' +

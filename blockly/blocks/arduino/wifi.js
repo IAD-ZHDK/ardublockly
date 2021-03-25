@@ -78,3 +78,29 @@ Blockly.Blocks['Nina_led'] = {
     }
   },
 };
+
+Blockly.Blocks['Nina_led_hsb'] = {
+  /**
+   * Block for controlling LEDS
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl('https://store.arduino.cc/arduino-mkr-wifi-1010');
+    this.setColour(Blockly.Blocks.wifi.HUE);
+    this.appendDummyInput()
+        .appendField("MKR1010 LED:")
+    this.appendValueInput('HUE')
+        .setCheck(Blockly.Types.NUMBER.checkList)
+        .appendField("hue: ");
+    this.appendValueInput('SATURATION')
+        .setCheck(Blockly.Types.NUMBER.checkList)
+        .appendField("saturation: ");
+    this.appendValueInput('BRIGHTNESS')
+        .setCheck(Blockly.Types.NUMBER.checkList)
+        .appendField("brightness:");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip("set MKR1010 HSB LED color");
+  }
+};

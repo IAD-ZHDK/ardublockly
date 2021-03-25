@@ -56,3 +56,36 @@ Blockly.Arduino['Nina_led'] = function(block) {
       '  WiFiDrv::pinMode(27, OUTPUT);  //BLUE', true);
   return code;
 };
+
+Blockly.Arduino['Nina_led_hsb'] = function(block) {
+  Blockly.Arduino.addInclude('wifiNina', '#include <WiFiNINA.h>');
+  Blockly.Arduino.addInclude('wifi_drv', '#include <utility/wifi_drv.h>');
+
+  let hue = Blockly.Arduino.valueToCode(block, 'HUE', Blockly.Arduino.ORDER_ATOMIC) || '0';
+  let saturation =  Blockly.Arduino.valueToCode(block, 'SATURATION', Blockly.Arduino.ORDER_ATOMIC) || '0';
+  let brightness =  Blockly.Arduino.valueToCode(block, 'BRIGHTNESS', Blockly.Arduino.ORDER_ATOMIC) || '0';
+
+  Blockly.Arduino.addFunction("fract", `float fract(float x) { return x - int(x); }`)
+  Blockly.Arduino.addFunction("mix", `float mix(float a, float b, float t) { return a + (b - a) * t; }`)
+  Blockly.Arduino.addFunction("step", `float step(float e, float x) { return x < e ? 0.0 : 1.0; }`)
+  Blockly.Arduino.addFunction("setLEDFromHSB", `void setLEDFromHSB(float h, float s, float b) {
+    h = h / 360.0;
+    s = s / 100.0;
+    b = b / 100.0;
+  
+    int red = b * mix(1.0, constrain(abs(fract(h + 1.0) * 6.0 - 3.0) - 1.0, 0.0, 1.0), s) * 255;
+    int green = b * mix(1.0, constrain(abs(fract(h + 0.6666666) * 6.0 - 3.0) - 1.0, 0.0, 1.0), s) * 255;
+    int blue = b * mix(1.0, constrain(abs(fract(h + 0.3333333) * 6.0 - 3.0) - 1.0, 0.0, 1.0), s) * 255;
+    
+    WiFiDrv::analogWrite(26, red);
+    WiFiDrv::analogWrite(25, green);
+    WiFiDrv::analogWrite(27, blue);
+  }`)
+
+  Blockly.Arduino.addSetup('wifiLEDpins', 'WiFiDrv::pinMode(25, OUTPUT);  //GREEN\n' +
+      '  WiFiDrv::pinMode(26, OUTPUT);  //RED\n' +
+      '  WiFiDrv::pinMode(27, OUTPUT);  //BLUE', true);
+
+
+  return `setLEDFromHSB(${hue}, ${saturation}, ${brightness});`
+};
