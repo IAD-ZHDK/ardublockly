@@ -44,7 +44,7 @@ Blockly.Arduino['mqtt_setup'] = function(block) {
   Serial.println("connected!");`;
 
   Blockly.Arduino.addFunction(messageReceivedName, `void ${messageReceivedName}(String &topic, String &payload) {
-  Serial.println(topic + ": " + payload);
+  Serial.println("MQTT: " + topic + " - " + payload);
 }`)
 
   Blockly.Arduino.addVariable("wifiClient",`WiFiClient net;`);
