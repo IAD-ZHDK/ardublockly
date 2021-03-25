@@ -40,7 +40,8 @@ Blockly.Arduino['mqtt_setup'] = function(block) {
   while (!client.connect("${device}", "${username}", "${password}")) {
     Serial.print(".");
     delay(1000);
-  }`;
+  }
+  Serial.println("connected!");`;
 
   Blockly.Arduino.addFunction(messageReceivedName, `void ${messageReceivedName}(String &topic, String &payload) {
   Serial.println(topic + ": " + payload);
