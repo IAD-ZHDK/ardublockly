@@ -40,9 +40,9 @@ Blockly.Blocks['mqtt_setup'] = {
         .appendField(new Blockly.FieldTextInput("arduino"), 'DEVICE')
     this.appendDummyInput()
         .appendField("Username: ")
-        .appendField(new Blockly.FieldTextInput(""), 'USERNAME')
+        .appendField(new Blockly.FieldTextInput("public"), 'USERNAME')
         .appendField("Password: ")
-        .appendField(new Blockly.FieldTextInput(""), 'PASSWORD')
+        .appendField(new Blockly.FieldTextInput("public"), 'PASSWORD')
     this.setInputsInline(false);
     this.setTooltip("Begin MQTT connection with specified credentials.");
     this.setNextStatement(true, null);
