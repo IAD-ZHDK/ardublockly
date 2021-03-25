@@ -28,9 +28,9 @@ Blockly.Arduino['ifttt_setup'] = function(block) {
   var param2 =  Blockly.Arduino.valueToCode(block, 'PARAM2', Blockly.Arduino.ORDER_ATOMIC) || '0';
   var param3 =  Blockly.Arduino.valueToCode(block, 'PARAM3', Blockly.Arduino.ORDER_ATOMIC) || '0';
   var code = `ifttt.triggerEvent("${event}"`;
-  code += `, "${param1}"`;
-  code += `, "${param2}"`;
-  code += `, "${param3}"`;
+  code += `, String(${param1})`;
+  code += `, String(${param2})`;
+  code += `, String(${param3})`;
   code += `);\n`;
 /** Blockly.Arduino.addSetup('ifttt', iftttSetupCode, true); */
   Blockly.Arduino.addVariable("wifiClient",`WiFiSSLClient client;`);
