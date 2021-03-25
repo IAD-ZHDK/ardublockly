@@ -28,7 +28,7 @@ Ardublockly.init = function() {
 
   // Hackish way to check if not running locally or on github pages
   if (document.location.hostname != 'localhost'
-      || document.location.hostname != 'iad-zhdk.github.io') {
+      && document.location.hostname != 'iad-zhdk.github.io') {
     Ardublockly.openNotConnectedModal();
     console.log('Offline app modal opened as non localhost host name found: ' +
                 document.location.hostname)
