@@ -69,12 +69,16 @@ Blockly.Blocks['Nina_led'] = {
         event.type == Blockly.Events.UI) {
       return;  // Block deleted or irrelevant event
     }
-    var ID = Blockly.Arduino.valueToCode(
-        this, "LEDNUMBER", Blockly.Arduino.ORDER_ATOMIC)
-    if (ID > 4) {
-      this.setWarningText("LEDs can only have an ID of 0, 1, 2, 3 or 4", 'mkrIoTCarrier_led');
+    var r = Blockly.Arduino.valueToCode(
+        this, "RED", Blockly.Arduino.ORDER_ATOMIC)
+    var g = Blockly.Arduino.valueToCode(
+        this, "GREEN", Blockly.Arduino.ORDER_ATOMIC)
+    var b = Blockly.Arduino.valueToCode(
+        this, "BLUE", Blockly.Arduino.ORDER_ATOMIC)
+    if (r > 255 ||g > 255||b > 255 ) {
+      this.setWarningText("LEDs chanels can only have a value of 0 to 255", 'Nina_led');
     }  else {
-      this.setWarningText(null, 'mkrIoTCarrier_led');
+      this.setWarningText(null, 'Nina_led');
     }
   },
 };
