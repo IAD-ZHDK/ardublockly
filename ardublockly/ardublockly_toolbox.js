@@ -233,14 +233,14 @@ Ardublockly.TOOLBOX_XML =
     '    <block type="spi_transfer_return"></block>' +
     '  </category>' +
     '  <sep></sep>' +
+    '  <sep></sep>' +
     '  <category id="mkrIoTCarrier" name="MKR IoT Carrier">' +
     '    <block type="mkrIoTCarrier_CaseBoolean"></block>' +
+    '  <category id="inputs" name="inputs">' +
     '    <block type="mkrIoTCarrier_BTNS_Update"></block>' +
     '    <block type="mkrIoTCarrier_BTNS"></block>' +
-    '    <block type="mkrIoTCarrier_SetScreenColor"></block>' +
-    '    <block type="mkrIoTCarrier_SetScreenText"></block>' +
-    '    <block type="mkrIoTCarrier_IMU"></block>' +
     '    <block type="mkrIoTCarrier_IMU_Update"></block>' +
+    '    <block type="mkrIoTCarrier_IMU"></block>' +
     '    <block type="mkrIoTCarrier_Humidity"></block>' +
     '    <block type="mkrIoTCarrier_Temperature"></block>' +
     '    <block type="mkrIoTCarrier_Pressure"></block>' +
@@ -248,6 +248,10 @@ Ardublockly.TOOLBOX_XML =
     '    <block type="mkrIoTCarrier_readColor"></block>' +
     '    <block type="mkrIoTCarrier_Proximity"></block>' +
     '    <block type="mkrIoTCarrier_Gesture"></block>' +
+    '  </category>' +
+    '  <category id="outputs" name="outputs">' +
+    '    <block type="mkrIoTCarrier_SetScreenColor"></block>' +
+    '    <block type="mkrIoTCarrier_SetScreenText"></block>' +
     '    <block type="mkrIoTCarrier_Relay"></block>' +
     '    <block type="mkrIoTCarrier_led">' +
     '    <value name="LEDNUMBER">' +
@@ -278,6 +282,7 @@ Ardublockly.TOOLBOX_XML =
     '        </shadow>' +
     '      </value>' +
     '    </block>' +
+    '  </category>' +
     '  </category>' +
     '  <category id="catCAS" name="CAS">' +
     '    <block type="wifi_setup"></block>' +
