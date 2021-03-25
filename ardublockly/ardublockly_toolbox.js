@@ -104,6 +104,8 @@ Ardublockly.TOOLBOX_XML =
     '      </value>' +
     '    </block>' +
     '    <block type="text_length"></block>' +
+    '    <block type="text_toint"></block>' +
+    '    <block type="text_tofloat"></block>' +
     '    <block type="text_isEmpty"></block>' +
     //'    <!--block type="text_trim"></block Need to update block -->' +
     //'    <!--block type="text_print"></block Part of the serial comms -->' +

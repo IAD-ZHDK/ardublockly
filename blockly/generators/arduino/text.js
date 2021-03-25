@@ -101,6 +101,20 @@ Blockly.Arduino['text_length'] = function(block) {
   return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
 };
 
+Blockly.Arduino['text_toint'] = function(block) {
+  var argument0 = Blockly.Arduino.valueToCode(block, 'VALUE',
+      Blockly.Arduino.ORDER_UNARY_POSTFIX) || '""';
+  var code = 'String(' + argument0 + ').toInt()';
+  return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
+};
+
+Blockly.Arduino['text_tofloat'] = function(block) {
+  var argument0 = Blockly.Arduino.valueToCode(block, 'VALUE',
+      Blockly.Arduino.ORDER_UNARY_POSTFIX) || '""';
+  var code = 'String(' + argument0 + ').toFloat()';
+  return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
+};
+
 /**
  * Code generator to test if a string (X) is null/empty.
  * String length info: http://arduino.cc/en/Reference/StringLength

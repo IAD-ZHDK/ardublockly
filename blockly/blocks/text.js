@@ -299,6 +299,60 @@ Blockly.Blocks['text_length'] = {
   }
 };
 
+Blockly.Blocks['text_toint'] = {
+  /**
+   * Block for string toint().
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "convert %1 to number",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "VALUE",
+          "check": Blockly.Types.TEXT.checkList.concat('Array'),
+        }
+      ],
+      "output": Blockly.Types.NUMBER.output,
+      "colour": Blockly.Blocks.texts.HUE,
+      "tooltip": "Converts text to number",
+      "helpUrl": "https://www.arduino.cc/reference/en/language/variables/data-types/string/functions/toint/"
+    });
+  },
+  /** @return {!string} Type of the block, text length always an integer. */
+  getBlockType: function() {
+    return Blockly.Types.NUMBER;
+  }
+};
+
+Blockly.Blocks['text_tofloat'] = {
+  /**
+   * Block for string tofloat().
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "convert %1 to decimal",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "VALUE",
+          "check": Blockly.Types.TEXT.checkList.concat('Array'),
+        }
+      ],
+      "output": Blockly.Types.NUMBER.output,
+      "colour": Blockly.Blocks.texts.HUE,
+      "tooltip": "Converts text to decimal",
+      "helpUrl": "https://www.arduino.cc/reference/en/language/variables/data-types/string/functions/tofloat/"
+    });
+  },
+  /** @return {!string} Type of the block, text length always an integer. */
+  getBlockType: function() {
+    return Blockly.Types.DECIMAL;
+  }
+};
+
 Blockly.Blocks['text_isEmpty'] = {
   /**
    * Block for is the string null?
