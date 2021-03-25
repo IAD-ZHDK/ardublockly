@@ -286,7 +286,7 @@ Ardublockly.TOOLBOX_XML =
     '    </block>' +
     '  </category>' +
     '  </category>' +
-    '  <category id="catCAS" name="CAS">' +
+    '  <category id="catCAS" name="IoT">' +
     '    <block type="wifi_setup"></block>' +
     '    <block type="mqtt_setup"></block>' +
     '    <block type="Nina_led">' +
@@ -328,7 +328,11 @@ Ardublockly.TOOLBOX_XML =
     '        <block type="text"></block>' +
     '      </value>' +
     '    </block>' +
-    '    <block type="mqtt_publish"></block>' +
+    '    <block type="mqtt_publish">' +
+    '      <value name="TOPIC">' +
+    '        <block type="text"></block>' +
+    '      </value>' +
+    '    </block>' +
     '    <block type="ifttt_setup"></block>' +
     '  </category>' +
     '</xml>';
