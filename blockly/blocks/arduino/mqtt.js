@@ -32,7 +32,7 @@ Blockly.Blocks['mqtt_setup'] = {
         .appendField("Setup MQTT Client")
     this.appendDummyInput()
         .appendField("Broker: ")
-        .appendField(new Blockly.FieldTextInput("public.cloud.shiftr.io"), 'BROKER')
+        .appendField(new Blockly.FieldTextInput("cas-design-technologies.cloud.shiftr.io"), 'BROKER')
         .appendField("Port: ")
         .appendField(new Blockly.FieldTextInput("1883"), 'PORT')
     this.appendDummyInput()
@@ -40,9 +40,9 @@ Blockly.Blocks['mqtt_setup'] = {
         .appendField(new Blockly.FieldTextInput("arduino"), 'DEVICE')
     this.appendDummyInput()
         .appendField("Username: ")
-        .appendField(new Blockly.FieldTextInput("public"), 'USERNAME')
+        .appendField(new Blockly.FieldTextInput("cas-design-technologies"), 'USERNAME')
         .appendField("Password: ")
-        .appendField(new Blockly.FieldTextInput("public"), 'PASSWORD')
+        .appendField(new Blockly.FieldTextInput("iad-cas-mkr1010"), 'PASSWORD')
     this.setInputsInline(false);
     this.setTooltip("Begin MQTT connection with specified credentials.");
     this.setNextStatement(true, null);
