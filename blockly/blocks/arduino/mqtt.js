@@ -61,7 +61,6 @@ Blockly.Blocks['mqtt_publish'] = {
         .appendField("on MQTT topic ")
     this.appendValueInput('PAYLOAD')
         .appendField("publish")
-        .setCheck(Blockly.Types.TEXT.checkList)
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);

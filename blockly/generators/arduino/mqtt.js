@@ -66,7 +66,7 @@ Blockly.Arduino['mqtt_publish'] = function(block) {
   let topic = Blockly.Arduino.valueToCode(block, 'TOPIC', Blockly.Arduino.ORDER_ATOMIC);
   let payload = Blockly.Arduino.valueToCode(block, 'PAYLOAD', Blockly.Arduino.ORDER_ATOMIC) || '0';
 
-  let code = `client.publish(${topic}, ${payload});`;
+  let code = `client.publish(${topic}, String(${payload}));`;
   return code;
 };
 
