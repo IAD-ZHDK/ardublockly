@@ -332,6 +332,9 @@ Ardublockly.TOOLBOX_XML =
     '      <value name="TOPIC">' +
     '        <block type="text"></block>' +
     '      </value>' +
+    '      <value name="PAYLOAD">' +
+    '        <block type="text"></block>' +
+    '      </value>' +
     '    </block>' +
     '    <block type="ifttt_setup"></block>' +
     '  </category>' +
