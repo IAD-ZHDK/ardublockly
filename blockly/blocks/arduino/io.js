@@ -260,3 +260,55 @@ Blockly.Blocks['io_pulsetimeout'] = {
     return Blockly.Types.NUMBER;
   }
 };
+
+
+Blockly.Blocks['io_neoPixel'] = {
+  /**
+   * Block for controlling neoPixel
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl('https://www.adafruit.com/category/168');
+    this.setColour(Blockly.Blocks.mkrIoTCarrier.HUE);
+    this.appendDummyInput()
+        .appendField("NeoPixel")
+    this.appendValueInput('PIN_NO')
+        .setCheck(Blockly.Types.NUMBER.checkList)
+        .appendField("NeoPixel Pin:");
+    this.appendValueInput('LEDNUMBER')
+        .setCheck(Blockly.Types.NUMBER.checkList)
+        .appendField("ID:");
+    this.appendValueInput('RED')
+        .setCheck(Blockly.Types.NUMBER.checkList)
+        .appendField("R:");
+    this.appendValueInput('GREEN')
+        .setCheck(Blockly.Types.NUMBER.checkList)
+        .appendField("G:");
+    this.appendValueInput('BLUE')
+        .setCheck(Blockly.Types.NUMBER.checkList)
+        .appendField("B:");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip("Set one LED on the IOT Carrier");
+  },
+
+  onchange: function(event) {
+    if (!this.workspace || event.type == Blockly.Events.MOVE ||
+        event.type == Blockly.Events.UI) {
+      return;  // Block deleted or irrelevant event
+    }
+    var r = Blockly.Arduino.valueToCode(
+        this, "RED", Blockly.Arduino.ORDER_ATOMIC)
+    var g = Blockly.Arduino.valueToCode(
+        this, "GREEN", Blockly.Arduino.ORDER_ATOMIC)
+    var b = Blockly.Arduino.valueToCode(
+        this, "BLUE", Blockly.Arduino.ORDER_ATOMIC)
+    if (r > 255 ||g > 255||b > 255 ) {
+      this.setWarningText("LEDs chanels can only have a value of 0 to 255", 'neoPixel');
+    }  else {
+      this.setWarningText(null, 'neoPixel');
+    }
+  },
+};
+

@@ -166,4 +166,25 @@ Blockly.Arduino['io_pulsetimeout'] = function(block) {
   var code = 'pulseIn(' + pin + ', ' + type + ', ' + timeout + ')';
 
   return [code, Blockly.Arduino.ORDER_ATOMIC];
-}; 
+};
+
+/**
+ * Code generator mkr IoT Carrier shield dot-star LEDS
+ */
+Blockly.Arduino['io_neoPixel'] = function(block) {
+  Blockly.Arduino.addInclude('neoPixelLibrary', '#include <Adafruit_NeoPixel.h>');
+  var pinNo = Blockly.Arduino.valueToCode(block, 'PIN_NO', Blockly.Arduino.ORDER_ATOMIC) || '0';
+  var ledNumber = Blockly.Arduino.valueToCode(block, 'LEDNUMBER', Blockly.Arduino.ORDER_ATOMIC) || '0';
+  var red = Blockly.Arduino.valueToCode(block, 'RED', Blockly.Arduino.ORDER_ATOMIC) || '0';
+  var green =  Blockly.Arduino.valueToCode(block, 'GREEN', Blockly.Arduino.ORDER_ATOMIC) || '0';
+  var blue =  Blockly.Arduino.valueToCode(block, 'BLUE', Blockly.Arduino.ORDER_ATOMIC) || '0';
+  var code = `pixels.setPixelColor(${ledNumber}, pixels.Color(`;
+  code += `${green}`;
+  code += `, ${red}`;
+  code += `, ${blue}`;
+  code += `));\n`;
+  code += `pixels.show();\n`;
+  Blockly.Arduino.addVariable("Adafruit_NeoPixel_Object ",`Adafruit_NeoPixel pixels(16, ${pinNo}, NEO_GRB + NEO_KHZ800);`, true);
+  Blockly.Arduino.addSetup('NeoPixelStart', 'pixels.begin();', true);
+  return code;
+};

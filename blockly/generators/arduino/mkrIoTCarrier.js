@@ -46,7 +46,7 @@ Blockly.Arduino['mkrIoTCarrier_Buzzer'] = function(block) {
  } else {
   code = `carrier.Buzzer.sound(${frequency});\n`;
  }
- var code;
+ var code; 
  Blockly.Arduino.addVariable("MKRIoTCarrierObject",`MKRIoTCarrier carrier;`, true);
  Blockly.Arduino.addSetup('carrierStart', 'carrier.begin();', true);
  //carrier.leds.show();

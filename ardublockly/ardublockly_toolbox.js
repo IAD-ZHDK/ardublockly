@@ -140,6 +140,33 @@ Ardublockly.TOOLBOX_XML =
     '    <block type="io_analogwrite"></block>' +
     '    <block type="io_analogread"></block>' +
     '    <block type="io_highlow"></block>' +
+    '    <block type="io_neoPixel">' +
+    '    <value name="PIN_NO">' +
+    '        <shadow type="math_number">' +
+    '          <field name="NUM">7</field>' +
+    '        </shadow>' +
+    '      </value>' +
+    '    <value name="LEDNUMBER">' +
+    '        <shadow type="math_number">' +
+    '          <field name="NUM">0</field>' +
+    '        </shadow>' +
+    '      </value>' +
+    '    <value name="RED">' +
+    '        <shadow type="math_number">' +
+    '          <field name="NUM">0</field>' +
+    '        </shadow>' +
+    '      </value>' +
+    '    <value name="GREEN">' +
+    '        <shadow type="math_number">' +
+    '          <field name="NUM">0</field>' +
+    '        </shadow>' +
+    '      </value>' +
+    '    <value name="BLUE">' +
+    '        <shadow type="math_number">' +
+    '          <field name="NUM">0</field>' +
+    '        </shadow>' +
+    '      </value>' +
+    '    </block>' +
     '    <block type="io_pulsein">' +
     '      <value name="PULSETYPE">' +
     '        <shadow type="io_highlow"></shadow>' +
