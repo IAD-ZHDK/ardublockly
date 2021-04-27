@@ -189,7 +189,7 @@ Blockly.Blocks['mkrIoTCarrier_IMU_Update'] = {
 
 Blockly.Blocks['mkrIoTCarrier_IMU'] = {
   /**
-   * Block for IMU x,y,z
+   * Block for IMU complementaryRoll, complementaryPitch, complementaryYaw
    * @this Blockly.Block
    */
   init: function() {
@@ -197,9 +197,9 @@ Blockly.Blocks['mkrIoTCarrier_IMU'] = {
     this.setColour(Blockly.Blocks.mkrIoTCarrier.HUE);
     this.appendDummyInput()
         .appendField("IMU axis:")
-        .appendField(new Blockly.FieldDropdown([['X', 'aX'], ['Y', 'aY'], ['Z', 'aZ']]), 'AXIS');
+        .appendField(new Blockly.FieldDropdown([['Roll', 'complementaryRoll'], ['Pitch', 'complementaryPitch'], ['Yaw', 'complementaryYaw']]), 'AXIS');
     this.setOutput(true, Blockly.Types.DECIMAL.output);
-    this.setTooltip("Get the x, y, or z from the imu");
+    this.setTooltip("Get the roll, pitch or yaw from the imu");
   },
   /** @return {string} The type of return value for the block, an integer. */
   getBlockType: function() {

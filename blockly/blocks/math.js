@@ -606,3 +606,33 @@ Blockly.Blocks['math_random_float'] = {
     return Blockly.Types.DECIMAL;
   }
 };
+
+Blockly.Blocks['math_formula'] = {
+  /**
+   * Block for formula input
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl('');
+    this.setColour( Blockly.Blocks.math.HUE);
+    this.appendDummyInput()
+        .appendField("formula: ")
+        .appendField(new Blockly.FieldTextInput(""), 'FORMULA')
+    this.appendValueInput('PARAMA')
+        .appendField("optional parameter a: ")
+        .setCheck(Blockly.Types.DECIMAL.checkList);
+    this.appendValueInput('PARAMB')
+        .appendField("optional parameter b: ")
+        .setCheck(Blockly.Types.DECIMAL.checkList);
+    this.appendValueInput('PARAMC')
+        .appendField("optional parameter c: ")
+        .setCheck(Blockly.Types.DECIMAL.checkList);
+    this.setInputsInline(false);
+    this.setOutput(true, Blockly.Types.DECIMAL.output);
+    this.setTooltip("Execute a math formula.");
+  },
+  /** @return {string} The type of return value for the block, a float. */
+  getBlockType: function() {
+    return Blockly.Types.DECIMAL;
+  },
+};

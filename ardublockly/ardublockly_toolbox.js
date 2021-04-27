@@ -92,6 +92,7 @@ Ardublockly.TOOLBOX_XML =
     '      </value>' +
     '    </block>' +
     '    <block type="math_random_float"></block>' +
+    '    <block type="math_formula"></block>' +
     '    <block type="base_map"></block>' +
     '  </category>' +
     '  <sep></sep>' +

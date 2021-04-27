@@ -343,3 +343,23 @@ Blockly.Arduino['math_random_int'] = function(block) {
 Blockly.Arduino['math_random_float'] = function(block) {
   return ['(rand() / RAND_MAX)', Blockly.Arduino.ORDER_UNARY_POSTFIX];
 };
+
+Blockly.Arduino['math_formula'] = function(block) {
+  let formula = block.getFieldValue('FORMULA');
+  let paramA = Blockly.Arduino.valueToCode(block, 'PARAMA', Blockly.Arduino.ORDER_ATOMIC) || null;
+  let paramB =  Blockly.Arduino.valueToCode(block, 'PARAMB', Blockly.Arduino.ORDER_ATOMIC) || null;
+  let paramC =  Blockly.Arduino.valueToCode(block, 'PARAMC', Blockly.Arduino.ORDER_ATOMIC) || null;
+
+  // replace abc to unique values to avoid conflicts with function names
+  formula = formula.replace("a", "{a}")
+  formula = formula.replace("b", "{b}")
+  formula = formula.replace("c", "{c}")
+
+  if(paramA != null) formula = formula.replace("{a}", paramA);
+  if(paramA != null) formula = formula.replace("{b}", paramB);
+  if(paramA != null) formula = formula.replace("{c}", paramC);
+
+  let code = `${formula}`;
+
+  return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
+};
