@@ -312,3 +312,21 @@ Blockly.Blocks['io_neoPixel'] = {
   },
 };
 
+Blockly.Blocks['VCNL4040_Proximity'] = {
+  /**
+   * Block for reading the sparkfun VCNL4040 proximity sensor
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl('https://www.sparkfun.com/products/15177');
+    this.setColour(Blockly.Blocks.mkrIoTCarrier.HUE);
+
+    this.appendDummyInput()
+        .appendField("Proximity Sensor Distance")
+    this.setOutput(true, Blockly.Types.NUMBER.output);
+    this.setTooltip("The value ranges from 0 to 65535");
+  },
+  getBlockType: function() {
+    return Blockly.Types.NUMBER;
+  },
+};

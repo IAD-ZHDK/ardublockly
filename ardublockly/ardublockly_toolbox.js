@@ -141,6 +141,7 @@ Ardublockly.TOOLBOX_XML =
     '    <block type="io_analogwrite"></block>' +
     '    <block type="io_analogread"></block>' +
     '    <block type="io_highlow"></block>' +
+    '    <block type="VCNL4040_Proximity"></block>' +
     '    <block type="io_neoPixel">' +
     '    <value name="PIN_NO">' +
     '        <shadow type="math_number">' +

@@ -169,7 +169,7 @@ Blockly.Arduino['io_pulsetimeout'] = function(block) {
 };
 
 /**
- * Code generator mkr IoT Carrier shield dot-star LEDS
+ * Code generator neopixel
  */
 Blockly.Arduino['io_neoPixel'] = function(block) {
   Blockly.Arduino.addInclude('neoPixelLibrary', '#include <Adafruit_NeoPixel.h>');
@@ -187,4 +187,23 @@ Blockly.Arduino['io_neoPixel'] = function(block) {
   Blockly.Arduino.addVariable("Adafruit_NeoPixel_Object ",`Adafruit_NeoPixel pixels(16, ${pinNo}, NEO_GRB + NEO_KHZ800);`, true);
   Blockly.Arduino.addSetup('NeoPixelStart', 'pixels.begin();', true);
   return code;
+};
+
+/**
+ * Code generator VCNL4040_Proximity
+ */
+
+Blockly.Arduino['VCNL4040_Proximity'] = function(block) {
+  Blockly.Arduino.addInclude('wire', '#include <Wire.h>');
+  Blockly.Arduino.addInclude('VCNL4040', '#include "SparkFun_VCNL4040_Arduino_Library.h"');
+  var code = `proximitySensor.getProximity()`;
+  Blockly.Arduino.addVariable("VCNL4040Object",`VCNL4040 proximitySensor;`, true);
+  Blockly.Arduino.addSetup('VCNL4040Setup>', 'Wire.begin(); //Join i2c bus\n' +
+      '\n' +
+      '  if (proximitySensor.begin() == false)\n' +
+      '  {\n' +
+      '    Serial.println("Device not found. Please check wiring.");\n' +
+      '    while (1); //Freeze!\n' +
+      '  }', true);
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
