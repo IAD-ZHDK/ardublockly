@@ -264,6 +264,10 @@ Ardublockly.TOOLBOX_XML =
     '    <block type="spi_transfer_return"></block>' +
     '  </category>' +
     '  <sep></sep>' +
+    '  <category id="smartServos" name="Lynx Smart Servos">' +
+    '    <block type="smartServos_Move_Degrees"></block>' +
+    '    <block type="smartServos_Move_RPM"></block>' +
+    '  </category>' +
     '  <sep></sep>' +
     '  <category id="mkrIoTCarrier" name="MKR IoT Carrier">' +
     '    <block type="mkrIoTCarrier_CaseBoolean"></block>' +
