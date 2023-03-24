@@ -265,10 +265,57 @@ Ardublockly.TOOLBOX_XML =
     '  </category>' +
     '  <sep></sep>' +
     '  <category id="smartServos" name="Lynx Smart Servos">' +
-    '    <block type="smartServos_Move_Degrees"></block>' +
-    '    <block type="smartServos_Move_RPM"></block>' +
-    '  </category>' +
+    '    <block type="smartServos_Setup_MKR1010"></block>' +
+    '    <block type="smartServos_Setup_SoftwareSerial">' +
+    '     <value name="TXPin">' +
+    '        <shadow type="math_number">' +
+    '          <field name="NUM">9</field>' +
+    '        </shadow>' +
+    '      </value>' +
+    '      <value name="RXPin">' +
+    '        <shadow type="math_number">' +
+    '          <field name="NUM">8</field>' +
+    '        </shadow>' +
+    '      </value>' +
+    '    </block>' +
+    '    <block type="smartServos_Move_Degrees">' +
+    '      <value name="MotorID">' +
+    '        <shadow type="math_number">' +
+    '          <field name="NUM">254</field>' +
+    '        </shadow>' +
+    '      </value>' +
+    '      <value name="Degrees">' +
+    '        <shadow type="math_number">' +
+    '          <field name="NUM">0</field>' +
+    '        </shadow>' +
+    '      </value>' +
+    '    </block>' +
+    '    <block type="smartServos_Move_RPM">' +
+    '      <value name="MotorID">' +
+    '        <shadow type="math_number">' +
+    '          <field name="NUM">254</field>' +
+    '        </shadow>' +
+    '      </value>' +
+    '      <value name="RPM">' +
+    '        <shadow type="math_number">' +
+    '          <field name="NUM">0</field>' +
+    '        </shadow>' +
+    '      </value>' +
+    '    </block>' +
+    '  <block type="smartServos_Set_LED">' +
+    '      <value name="MotorID">' +
+    '        <shadow type="math_number">' +
+    '          <field name="NUM">254</field>' +
+    '        </shadow>' +
+    '      </value>' +
+    '      <value name="LEDCOLOR">' +
+    '        <shadow type="math_number">' +
+    '          <field name="NUM">0</field>' +
+    '        </shadow>' +
+    '      </value>' +
+    '    </block>' +
     '  <sep></sep>' +
+    '  </category>' +
     '  <category id="mkrIoTCarrier" name="MKR IoT Carrier">' +
     '    <block type="mkrIoTCarrier_CaseBoolean"></block>' +
     '  <category id="inputs" name="inputs">' +
