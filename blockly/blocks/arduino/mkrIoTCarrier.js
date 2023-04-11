@@ -124,9 +124,10 @@ Blockly.Blocks['mkrIoTCarrier_CaseBoolean'] = {
     this.setHelpUrl('https://www.arduino.cc/education/explore-iot-kit');
     this.setColour(Blockly.Blocks.mkrIoTCarrier.HUE);
     this.appendDummyInput()
-        .appendField("Case On:")
+        .appendField("Setup MKR IOT Carrier. Case On:")
         .appendField(new Blockly.FieldDropdown([['FALSE', 'false'], ['TRUE', 'true']]), 'CARRIER_CASE');
     this.setNextStatement(true, null);
+    this.setPreviousStatement(true, null);
     this.setTooltip("Check to TRUE if case is on for adjusted sensitivity");
   },
 };

@@ -192,3 +192,46 @@ Blockly.Blocks['smartServos_Set_LED'] = {
     }
   },
 };
+
+
+Blockly.Blocks['smartServos_Set_NewID'] = {
+  /**
+   * Block for controlling Smart servos by RPM
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl('https://wiki.lynxmotion.com/info/wiki/lynxmotion/view/lynxmotion-smart-servo/');
+    this.setColour(Blockly.Blocks.smartServos.HUE);
+    this.appendDummyInput()
+        .appendField("Set new ID")
+    this.appendValueInput('MotorID')
+        .setCheck(Blockly.Types.NUMBER.checkList)
+        .appendField("ID:");
+    this.appendValueInput('NewID')
+        .setCheck(Blockly.Types.NUMBER.checkList)
+        .appendField("new ID:");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip("The ID 254 is a broadcast for all motors");
+  },
+
+  onchange: function(event) {
+    if (!this.workspace || event.type == Blockly.Events.MOVE ||
+        event.type == Blockly.Events.UI) {
+      return;  // Block deleted or irrelevant event
+    }
+    var MotorID = Blockly.Arduino.valueToCode(
+        this, "MotorID", Blockly.Arduino.ORDER_ATOMIC)
+
+        var NewID = Blockly.Arduino.valueToCode(
+          this, "NewID", Blockly.Arduino.ORDER_ATOMIC)
+
+    if (MotorID > 254 || NewID > 254) {
+      this.setWarningText("Motor ID can only be up to 253, with 254 broadcasting to all attached motors", 'smartServos_Move_RPM');
+    }  else {
+      this.setWarningText(null, 'smartServos_Move_RPM');
+    }
+  },
+};
+

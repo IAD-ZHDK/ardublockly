@@ -64,8 +64,9 @@ Blockly.Arduino['smartServos_Move_Degrees'] = function(block) {
  Blockly.Arduino.addInclude('wiring_private', '#include "wiring_private.h"');
  var MotorID = Blockly.Arduino.valueToCode(block, 'MotorID', Blockly.Arduino.ORDER_ATOMIC) || '0';
  var Degrees = Blockly.Arduino.valueToCode(block, 'Degrees', Blockly.Arduino.ORDER_ATOMIC) || '0';
+ Degrees = Degrees*10;
+ Degrees = Math.floor(Degrees);
  var code = ` mySerial.print(String("#") + ${MotorID} + String("D") + ${Degrees}  + "\\r"); // move to degrees \n`;
- 
  return code;
 };
 
@@ -87,7 +88,7 @@ Blockly.Arduino['smartServos_Move_RPM'] = function(block) {
 Blockly.Arduino['smartServos_Set_LED'] = function(block) {
     Blockly.Arduino.addInclude('wiring_private', '#include "wiring_private.h"');
     var MotorID = Blockly.Arduino.valueToCode(block, 'MotorID', Blockly.Arduino.ORDER_ATOMIC) || '0';
-    var LEDCOLOR = Blockly.Arduino.valueToCode(block, 'RPM', Blockly.Arduino.ORDER_ATOMIC) || '0'; 
+    var LEDCOLOR = Blockly.Arduino.valueToCode(block, 'LEDCOLOR', Blockly.Arduino.ORDER_ATOMIC) || '0'; 
     // 0=Off (black); 1=Red 2=Green; 3=Blue; 4=Yellow; 5=Cyan; 6=Magenta; 7=White;
     var code = ` mySerial.print(String("#") + ${MotorID} + String("LED") + ${LEDCOLOR}  + "\\r"); // set LED \n`;
     
@@ -97,14 +98,14 @@ Blockly.Arduino['smartServos_Set_LED'] = function(block) {
 /**
  * Code generator for Lynx Smart Servos set motor new ID
  */
-Blockly.Arduino['smartServos_Move_NewID'] = function(block) {
+Blockly.Arduino['smartServos_Set_NewID'] = function(block) {
     Blockly.Arduino.addInclude('wiring_private', '#include "wiring_private.h"');
     var MotorID = Blockly.Arduino.valueToCode(block, 'MotorID', Blockly.Arduino.ORDER_ATOMIC) || '0';
     var NewID = Blockly.Arduino.valueToCode(block, 'NewID', Blockly.Arduino.ORDER_ATOMIC) || '0'; 
     // 0=Off (black); 1=Red 2=Green; 3=Blue; 4=Yellow; 5=Cyan; 6=Magenta; 7=White;
     var code = ``;
-    var codeSetup = ` mySerial.print(String("#") + ${MotorID} + String("CID") + ${NewID}  + "\\r"); // set mew motor ID  \n`;
-     codeSetup += ` delay(2000);  \n`;
+    var code = ` mySerial.print(String("#") + ${MotorID} + String("CID") + ${NewID}  + "\\r"); // set mew motor ID  \n`;
+    code += ` delay(2000);  \n`;
     
     return code;
    };

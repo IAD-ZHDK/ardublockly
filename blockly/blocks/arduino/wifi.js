@@ -12,13 +12,14 @@
 'use strict';
 
 goog.provide('Blockly.Blocks.wifi');
-
+goog.provide('Blockly.Blocks.OSC');
 goog.require('Blockly.Blocks');
 goog.require('Blockly.Types');
 
 
 /** Common HSV hue for all blocks in this category. */
 Blockly.Blocks.wifi.HUE = 10;
+Blockly.Blocks.OSC.HUE = 90;
 
 Blockly.Blocks['wifi_setup'] = {
   /**
@@ -106,5 +107,78 @@ Blockly.Blocks['Nina_led_hsb'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip("set MKR1010 HSB LED color");
+  }
+};
+
+
+Blockly.Blocks['OSC_setup'] = {
+  /**
+   * Block for setting the speed of the WIFI connection.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl('https://github.com/CNMAT/OSC');
+    this.setColour(Blockly.Blocks.OSC.HUE);
+    this.appendDummyInput()
+        .appendField("Setup OSC")
+    this.appendDummyInput()
+        .appendField("Port: ")
+        .appendField(new Blockly.FieldTextInput("8000"), 'PORT')
+    this.setInputsInline(false);
+    this.setTooltip("Begin OSC with specified credentials.");
+    this.setNextStatement(true, null);
+  }
+};
+
+Blockly.Blocks['OSC_publish'] = {
+  /**
+   * Block for MQTT publish
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl('https://github.com/CNMAT/OSC');
+    this.setColour(Blockly.Blocks.OSC.HUE);
+    this.appendValueInput('REMOTEADRESS')
+    .appendField("Send OSC message to IP")
+    this.appendValueInput('TOPIC')
+        .appendField("on topic ")
+    this.appendValueInput('PAYLOAD')
+        .appendField("data")
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip("publish OSC message");
+  }
+};
+
+Blockly.Blocks['OSC_subscribe'] = {
+  /**
+   * Block for MQTT subscribe
+   * @this Blockly.Block
+   *
+   */
+
+  init: function() {
+    this.setHelpUrl('https://github.com/CNMAT/OSC');
+    this.setColour(Blockly.Blocks.OSC.HUE );
+    this.appendValueInput('TOPIC')
+        .appendField("Subscribe OSC topic ")
+    this.appendDummyInput()
+        .appendField(" to ")
+        .appendField(new Blockly.FieldVariable(
+            Blockly.Msg.TEXT_APPEND_VARIABLE), 'VAR');
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setInputsInline(true);
+    // Assign 'this' to a variable for use in the tooltip closure below.
+    var thisBlock = this;
+    this.setTooltip(function() {
+      return Blockly.Msg.TEXT_APPEND_TOOLTIP.replace('%1',
+          thisBlock.getFieldValue('VAR'));
+    });
+  },
+
+  getVarType: function(varName) {
+    return Blockly.Types.TEXT;
   }
 };

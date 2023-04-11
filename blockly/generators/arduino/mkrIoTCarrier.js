@@ -15,6 +15,21 @@ goog.provide('Blockly.Arduino.mkrIoTCarrier_led');
 goog.require('Blockly.Arduino');
 
 /**
+ * Code generator mkr setup and case on/off
+ */
+Blockly.Arduino['mkrIoTCarrier_CaseBoolean'] = function(block) {
+  Blockly.Arduino.addInclude('Arduino_MKRIoTCarrier', '#include <Arduino_MKRIoTCarrier.h>');
+  var CASE = block.getFieldValue("CARRIER_CASE");
+  var code = `CARRIER_CASE = ${CASE};`;
+  Blockly.Arduino.addVariable("MKRIoTCarrierObject",`MKRIoTCarrier carrier;`, true);
+  Blockly.Arduino.addSetup('CARRIER_CASE', code, true);
+  Blockly.Arduino.addSetup('carrierStart', 'carrier.begin();', true);
+  code = "";
+  return code;
+ };
+
+
+/**
  * Code generator mkr IoT Carrier shield dot-star LEDS
  */
 Blockly.Arduino['mkrIoTCarrier_led'] = function(block) {
@@ -53,14 +68,7 @@ Blockly.Arduino['mkrIoTCarrier_Buzzer'] = function(block) {
  return code;
 };
 
-Blockly.Arduino['mkrIoTCarrier_CaseBoolean'] = function(block) {
- Blockly.Arduino.addInclude('Arduino_MKRIoTCarrier', '#include <Arduino_MKRIoTCarrier.h>');
- var CASE = block.getFieldValue("CARRIER_CASE");
- var code = `CARRIER_CASE = ${CASE};\n`;
- Blockly.Arduino.addVariable("MKRIoTCarrierObject",`MKRIoTCarrier carrier;`, true);
- Blockly.Arduino.addSetup('carrierStart', 'carrier.begin();', true);
- return code;
-};
+
 
 Blockly.Arduino['mkrIoTCarrier_BTNS_Update'] = function(block) {
  Blockly.Arduino.addInclude('Arduino_MKRIoTCarrier', '#include <Arduino_MKRIoTCarrier.h>');

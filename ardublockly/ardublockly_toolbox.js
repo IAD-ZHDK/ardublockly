@@ -278,6 +278,18 @@ Ardublockly.TOOLBOX_XML =
     '        </shadow>' +
     '      </value>' +
     '    </block>' +
+    '    <block type="smartServos_Set_NewID">' +
+    '      <value name="MotorID">' +
+    '        <shadow type="math_number">' +
+    '          <field name="NUM">254</field>' +
+    '        </shadow>' +
+    '      </value>' +
+    '      <value name="NewID">' +
+    '        <shadow type="math_number">' +
+    '          <field name="NUM">0</field>' +
+    '        </shadow>' +
+    '      </value>' +
+    '    </block>' +
     '    <block type="smartServos_Move_Degrees">' +
     '      <value name="MotorID">' +
     '        <shadow type="math_number">' +
@@ -368,7 +380,6 @@ Ardublockly.TOOLBOX_XML =
     '  </category>' +
     '  <category id="catCAS" name="IoT">' +
     '    <block type="wifi_setup"></block>' +
-    '    <block type="mqtt_setup"></block>' +
     '    <block type="Nina_led">' +
     '    <value name="RED">' +
     '        <shadow type="math_number">' +
@@ -403,9 +414,34 @@ Ardublockly.TOOLBOX_XML =
     '        </shadow>' +
     '      </value>' +
     '</block>' +
-    '    <block type="mqtt_subscribe">' +
+    '    <block type="OSC_setup">' +
     '      <value name="TOPIC">' +
     '        <block type="text"></block>' +
+    '      </value>' +
+    '    </block>' +
+    '    <block type="OSC_publish">' +
+    '      <value name="REMOTEADRESS">' +
+ //   '       <shadow type="text">' +
+//    '        <field name="NUM">1.1.1.1</field>' +
+    '        <block type="text">"sensor"</block>' +   
+  //  '       </shadow>' +
+    '      </value>' +
+    '      <value name="TOPIC">' +
+    '        <block type="text">"sensor"</block>' +
+    '      </value>' +
+    '      <value name="PAYLOAD">' +
+    '        <block type="text"></block>' +
+    '      </value>' +
+    '    </block>' +
+    '    <block type="OSC_subscribe">' +
+    '      <value name="TOPIC">' +
+    '        <block type="text">"sensor"</block>' +
+    '      </value>' +
+    '    </block>' +
+    '    <block type="mqtt_setup"></block>' +
+    '    <block type="mqtt_subscribe">' +
+    '      <value name="TOPIC">' +
+    '        <block type="text">"sensor"</block>' +
     '      </value>' +
     '    </block>' +
     '    <block type="mqtt_publish">' +

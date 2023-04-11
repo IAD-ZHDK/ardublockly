@@ -26,7 +26,11 @@ Blockly.Arduino['wifi_setup'] = function(block) {
 
   var ssid = block.getFieldValue('SSID');
   var password = block.getFieldValue('PASSWORD');
-  var setupSerial = `Serial.begin(9600);`;
+  
+  var serialSpeed = 9600;
+  var serialSetupCode = 'Serial.begin(' + serialSpeed + ');';
+  Blockly.Arduino.addSetup('serial_Serial', serialSetupCode, true);
+
   var wifiSetupCode = `while (status != WL_CONNECTED) {
     Serial.println("Attempting to connect to WPA SSID: ${ssid}");
     status = WiFi.begin("${ssid}", "${password}");
@@ -34,7 +38,7 @@ Blockly.Arduino['wifi_setup'] = function(block) {
   }
   Serial.println("connected!");`;
   Blockly.Arduino.addVariable("wifiStatus",`int status = WL_IDLE_STATUS;`);
-  Blockly.Arduino.addSetup('serial', setupSerial, true);
+ 
   Blockly.Arduino.addSetup('wifi', wifiSetupCode, true);
   var code = '';
   return code;
@@ -88,4 +92,98 @@ Blockly.Arduino['Nina_led_hsb'] = function(block) {
 
 
   return `setLEDFromHSB(${hue}, ${saturation}, ${brightness});`
+};
+
+
+/**
+ * Code generator for block for setting up the OSC connection
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {array} Completed code.
+ */
+Blockly.Arduino['OSC_setup'] = function(block) {
+  Blockly.Arduino.addInclude('UDP', '#include <WiFiUdp.h>');
+  Blockly.Arduino.addInclude('wifiNina', '#include <WiFiNINA.h>');
+  Blockly.Arduino.addInclude('OSC', '#OSCMessage.h');
+
+  Blockly.Arduino.addVariable("WiFiUDP",`WiFiUDP Udp;`, true);
+
+
+  var port = block.getFieldValue('PORT');
+  Blockly.Arduino.addVariable("remotePort",`const int remotePort ${port})`, true);
+  
+  var serialSpeed = 9600;
+  var serialSetupCode = 'Serial.begin(' + serialSpeed + ');';
+  Blockly.Arduino.addSetup('serial_Serial', serialSetupCode, true);
+
+  var OSCSetupCode = `Udp.begin(${port});
+  IPAddress ip = WiFi.localIP();
+  Serial.print("IP Address: ");
+  Serial.println(ip);
+  `;
+
+  Blockly.Arduino.addSetup('OSCsetup', OSCSetupCode, true);
+  var code = '';
+  return code;
+};
+
+/**
+ * Code generator for block for publish payload on specific topic
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {array} Completed code.
+ */
+Blockly.Arduino['OSC_publish'] = function(block) {
+  let topic = Blockly.Arduino.valueToCode(block, 'TOPIC', Blockly.Arduino.ORDER_ATOMIC); // this will need to be formated as "/topic/"
+  let payload = Blockly.Arduino.valueToCode(block, 'PAYLOAD', Blockly.Arduino.ORDER_ATOMIC) || '0';
+  let remoteAddress = Blockly.Arduino.valueToCode(block, 'REMOTEADRESS', Blockly.Arduino.ORDER_ATOMIC) || '0'; 
+  let code = `OSCMessage msg(${topic});
+  msg.add(String(${payload}));  
+  Udp.beginPacket(${remoteAddress}, remotePort);
+  msg.send(Udp); // send the bytes to the SLIP stream
+  Udp.endPacket(); // mark the end of the OSC Packet
+  msg.empty(); // free space occupied by message`;
+  return code;
+};
+
+/**
+ * Code generator for block for publish payload on specific topic
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {array} Completed code.
+ */
+Blockly.Arduino['OSC_subscribe'] = function(block) {
+  let varName = Blockly.Arduino.variableDB_.getName(block.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
+  let topic = Blockly.Arduino.valueToCode(block, 'TOPIC', Blockly.Arduino.ORDER_ATOMIC);
+
+  //Blockly.Arduino.addSetup(`mqttSub_${topic}`, `client.subscribe(${topic});`)
+  //Blockly.Arduino.appendFunction(messageReceivedName, `  
+ ////  ${varName} = payload;
+ // }`)
+
+ Blockly.Arduino.addFunction("OSCMsgReceive", `void OSCMsgReceive() {
+  OSCMessage msgIN;
+  int size;
+  if ((size = Udp.parsePacket()) > 0) {
+    while (size--) {
+        msgIN.fill(Udp.read());
+    }
+    if (!msgIN.hasError()) {
+      msgIN.route(${varName}, oscString);
+    } else {
+        // Serial.print(msgIN.hasError());
+    }
+  }
+}`)
+
+Blockly.Arduino.addFunction("oscString", `void sensorString(OSCMessage& msg, int addrOffset) {
+  boolean error;
+  if (msg.isString(0))  //only if theres a number
+  {
+    ${varName} = msg.isString(0);  //get string from the OSC message
+  } else {
+    error = 0;  //trow an error
+  }
+  // 
+ }`)
+
+  let code = `OSCMsgReceive()`;
+  return code;
 };
