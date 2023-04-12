@@ -103,13 +103,13 @@ Blockly.Arduino['Nina_led_hsb'] = function(block) {
 Blockly.Arduino['OSC_setup'] = function(block) {
   Blockly.Arduino.addInclude('UDP', '#include <WiFiUdp.h>');
   Blockly.Arduino.addInclude('wifiNina', '#include <WiFiNINA.h>');
-  Blockly.Arduino.addInclude('OSC', '#OSCMessage.h');
+  Blockly.Arduino.addInclude('OSC', '#include <OSCMessage.h>');
 
   Blockly.Arduino.addVariable("WiFiUDP",`WiFiUDP Udp;`, true);
 
 
   var port = block.getFieldValue('PORT');
-  Blockly.Arduino.addVariable("remotePort",`const int remotePort ${port})`, true);
+  Blockly.Arduino.addVariable("remotePort",`const int remotePort = ${port};`, true);
   
   var serialSpeed = 9600;
   var serialSetupCode = 'Serial.begin(' + serialSpeed + ');';
@@ -136,7 +136,14 @@ Blockly.Arduino['OSC_publish'] = function(block) {
   let payload = Blockly.Arduino.valueToCode(block, 'PAYLOAD', Blockly.Arduino.ORDER_ATOMIC) || '0';
   let remoteAddress = Blockly.Arduino.valueToCode(block, 'REMOTEADRESS', Blockly.Arduino.ORDER_ATOMIC) || '0'; 
   let code = `OSCMessage msg(${topic});
-  msg.add(String(${payload}));  
+
+  // convert to char array
+  String str = String(${payload});
+  int str_len = str.length() + 1; 
+  char char_array[str_len];
+  str.toCharArray(char_array, str_len);
+  //
+  msg.add(char_array);
   Udp.beginPacket(${remoteAddress}, remotePort);
   msg.send(Udp); // send the bytes to the SLIP stream
   Udp.endPacket(); // mark the end of the OSC Packet
@@ -166,24 +173,26 @@ Blockly.Arduino['OSC_subscribe'] = function(block) {
         msgIN.fill(Udp.read());
     }
     if (!msgIN.hasError()) {
-      msgIN.route(${varName}, oscString);
+      msgIN.route(${topic}, oscString);
     } else {
         // Serial.print(msgIN.hasError());
     }
   }
 }`)
 
-Blockly.Arduino.addFunction("oscString", `void sensorString(OSCMessage& msg, int addrOffset) {
+Blockly.Arduino.addFunction("oscString", `void oscString(OSCMessage& msg, int addrOffset) {
   boolean error;
   if (msg.isString(0))  //only if theres a number
   {
-    ${varName} = msg.isString(0);  //get string from the OSC message
+    char buf[] = "";
+    msg.getString(0, buf);
+    ${varName} = String(buf);      //convert char array to string here.
   } else {
     error = 0;  //trow an error
   }
   // 
  }`)
 
-  let code = `OSCMsgReceive()`;
+  let code = `OSCMsgReceive();`;
   return code;
 };

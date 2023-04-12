@@ -64,9 +64,7 @@ Blockly.Arduino['smartServos_Move_Degrees'] = function(block) {
  Blockly.Arduino.addInclude('wiring_private', '#include "wiring_private.h"');
  var MotorID = Blockly.Arduino.valueToCode(block, 'MotorID', Blockly.Arduino.ORDER_ATOMIC) || '0';
  var Degrees = Blockly.Arduino.valueToCode(block, 'Degrees', Blockly.Arduino.ORDER_ATOMIC) || '0';
- Degrees = Degrees*10;
- Degrees = Math.floor(Degrees);
- var code = ` mySerial.print(String("#") + ${MotorID} + String("D") + ${Degrees}  + "\\r"); // move to degrees \n`;
+ var code = ` mySerial.print(String("#") + ${MotorID} + String("D") + int(${Degrees}*10)  + "\\r"); // move to degrees \n`;
  return code;
 };
 
